@@ -13,7 +13,7 @@
 }
 
 .dark {
-	--background: #0a0a0a;
+	--background: #0e0f0f;
 	--foreground: #ededed;
 	--primary: #753600;
 	--primary-foreground: #fcce5a;
@@ -40,7 +40,7 @@
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--background: #0a0a0a;
+		--background: #0e0f0f;
 		--foreground: #ededed;
 		--primary: #753600;
 		--primary-foreground: #fcce5a;
