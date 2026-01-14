@@ -27,4 +27,12 @@ export class AuthService {
 	static removeCurrentUser(): void {
 		localStorage.removeItem(this.CURRENT_USER_KEY);
 	}
+
+	/**
+	 * Check if user is authenticated
+	 * @returns boolean
+	 */
+	static isAuthenticated(): boolean {
+		return this.getCurrentUser() !== null;
+	}
 }
