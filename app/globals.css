@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@import "../styles/common.css";
+
 :root {
 	--background: #ffffff;
 	--foreground: #171717;
@@ -10,6 +12,8 @@
 	--accent: #f59e0b;
 	--muted: #f3f4f6;
 	--border: #e5e7eb;
+
+	--box: #181818;
 }
 
 .dark {
@@ -22,6 +26,8 @@
 	--accent: #fbbf24;
 	--muted: #1f2937;
 	--border: #374151;
+
+	--box: #181818;
 }
 
 @theme inline {

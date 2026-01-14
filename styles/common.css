@@ -1,0 +1,12 @@
+.bg-box {
+	background-color: var(--box);
+}
+
+/* Add more common utility classes here */
+.text-box {
+	color: var(--box);
+}
+
+.border-box {
+	border-color: var(--box);
+}
