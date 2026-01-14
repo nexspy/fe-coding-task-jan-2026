@@ -1,6 +1,7 @@
 /**
  * User service to handle user-related operations.
  */
+import { LoginPayload } from "@/types/Auth";
 import { CompanyCreatePayload } from "@/types/Company";
 import { ServerResponse } from "@/types/Server";
 import { User, UserCreatePayload } from "@/types/User";
@@ -20,6 +21,34 @@ export class UserService {
 	static async getAllUsers(): Promise<User[]> {
 		const users = localStorage.getItem(this.USERS_KEY);
 		return users ? JSON.parse(users) : [];
+	}
+
+	/**
+	 * User Login by checking email and password
+	 * @param data
+	 * @returns
+	 */
+	static async login(data: LoginPayload): Promise<ServerResponse | null> {
+		const users = await this.getAllUsers();
+
+		// check if email and password match
+		const user = users.find(
+			(u) => u.email === data.email && u.password === data.password
+		);
+		console.log("user", user);
+
+		if (user) {
+			return {
+				success: true,
+				message: "Login successful",
+				data: user,
+			};
+		} else {
+			return {
+				success: false,
+				message: "Invalid email or password",
+			};
+		}
 	}
 
 	/**

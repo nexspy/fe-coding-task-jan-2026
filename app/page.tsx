@@ -1,19 +1,118 @@
+"use client";
+
+import { useForm, SubmitHandler } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { LoginPayload } from "@/types/Auth";
+import { UserService } from "@/services/User.service";
 
 export default function Home() {
-	return (
-		<div className="flex min-h-screen items-center justify-center font-sans dark:bg-black">
-			<main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 sm:items-start">
-				<div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-					<h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-foreground dark:text-zinc-50">
-						Login Page
-					</h1>
+	const router = useRouter();
 
-					<Link href="/signup" className="text-blue-500 underline">
-						Go to Signup Page
+	const {
+		register,
+		handleSubmit,
+		watch,
+		formState: { errors },
+	} = useForm<LoginPayload>();
+
+	const onSubmit: SubmitHandler<LoginPayload> = async (data) => {
+		try {
+			const response = await UserService.login(data);
+			if (response && !response.success) {
+				alert(response.message);
+			} else {
+				alert("Login successful!");
+			}
+		} catch (error) {
+			console.error("Error during login:", error);
+		}
+	};
+
+	return (
+		<div className="flex min-h-screen items-center justify-center bg-background px-4">
+			<div className="w-full max-w-md rounded-lg border border-border bg-box p-8 shadow-lg">
+				{/* Header */}
+				<div className="mb-6 text-center">
+					<h1 className="text-3xl font-semibold text-white">Login</h1>
+
+					<p>Welcome to Vega</p>
+
+					{/* Form */}
+					<form
+						className="space-y-4 text-left"
+						onSubmit={handleSubmit(onSubmit)}
+					>
+						<div>
+							<label
+								htmlFor="email"
+								className="block text-sm font-medium text-foreground"
+							>
+								Email
+							</label>
+							<input
+								type="text"
+								id="name"
+								className="mt-1 w-full rounded-md border border-border bg-background px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+								placeholder="Email"
+								{...register("email", {
+									required: "Email is required",
+									pattern: {
+										value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+										message: "Invalid email address",
+									},
+								})}
+							/>
+							{errors.email && (
+								<p className="text-sm text-red-500 mt-1">
+									{errors.email.message}
+								</p>
+							)}
+						</div>
+
+						<div>
+							<label
+								htmlFor="password"
+								className="block text-sm font-medium text-foreground"
+							>
+								Password
+							</label>
+							<input
+								type="password"
+								id="password"
+								className="mt-1 w-full rounded-md border border-border bg-background px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+								placeholder="••••••••"
+								{...register("password", {
+									required: "Password is required",
+									minLength: {
+										value: 8,
+										message:
+											"Password must be at least 8 characters",
+									},
+								})}
+							/>
+							{errors.password && (
+								<p className="text-sm text-red-500 mt-1">
+									{errors.password.message}
+								</p>
+							)}
+						</div>
+
+						<button
+							type="submit"
+							className="w-full rounded-md bg-primary px-4 py-2 font-semibold text-primary-foreground hover:bg-accent transition-colors"
+						>
+							Login
+						</button>
+					</form>
+					<Link
+						href="/signup"
+						className="text-sm text-primary hover:underline"
+					>
+						Create Free Account
 					</Link>
 				</div>
-			</main>
+			</div>
 		</div>
 	);
 }
