@@ -41,7 +41,7 @@ export default function Home() {
 
 	return (
 		<div className="flex min-h-screen items-center justify-center bg-bgColor bg-shadowImage px-4">
-			<div className="w-full max-w-md rounded-lg border border-border bg-box p-8 shadow-lg">
+			<div className="flex flex-col w-full max-w-md rounded-lg border border-border bg-box p-8 shadow-lg">
 				{/* Header */}
 				<div className="mb-6 text-center">
 					<h1 className="text-3xl font-semibold text-white">
@@ -116,18 +116,19 @@ export default function Home() {
 
 						<button
 							type="submit"
-							className="w-full rounded-md bg-primary px-4 py-2 font-semibold text-primary-foreground hover:bg-accent transition-colors"
+							className="w-full rounded-md bg-primary px-4 py-2 font-semibold text-primary-foreground hover:bg-accent hover:text-black transition-colors"
 						>
 							Login
 						</button>
 					</form>
-					<Link
-						href="/signup"
-						className="text-sm text-primary hover:underline"
-					>
-						Create Free Account
-					</Link>
 				</div>
+
+				<Link
+					href="/signup"
+					className="text-sm text-center text-primary hover:text-accent w-full"
+				>
+					Create Free Account
+				</Link>
 			</div>
 		</div>
 	);
