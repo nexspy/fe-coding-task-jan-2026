@@ -2,7 +2,7 @@
 
 Your task is to create a frontend application using React and TypeScript that presents a user's financial portfolio in a visually engaging way. Application contains two parts - public login page (simple local storage credentials is enough) and secure part with dashboard containing components below.
 
-## Features
+## Features
 
 The main features you need to implement are:
 
@@ -26,7 +26,7 @@ You will be provided with the following RESTful API endpoints:
 5. The application should be responsive and have a user-friendly interface.
 6. Write clean, modular, and reusable code.
 
-## Deliverables
+## Deliverables
 
 A GitHub repository containing your application, including all code, tests, and a README file containing instructions on how to install and run your application.
 Evaluation Criteria:
