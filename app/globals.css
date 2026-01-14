@@ -14,6 +14,7 @@
 	--border: #e5e7eb;
 
 	--box: #181818;
+	--bgColorDark: #171717;
 }
 
 .dark {
@@ -28,6 +29,7 @@
 	--border: #374151;
 
 	--box: #181818;
+	--bgColorDark: #171717;
 }
 
 @theme inline {
@@ -42,6 +44,8 @@
 	--color-border: var(--border);
 	--font-sans: var(--font-geist-sans);
 	--font-mono: var(--font-geist-mono);
+
+	--bgColorDark: #171717;
 }
 
 @media (prefers-color-scheme: dark) {

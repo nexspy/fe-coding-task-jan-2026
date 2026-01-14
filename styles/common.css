@@ -2,6 +2,10 @@
 	background-color: var(--box);
 }
 
+.bg-bgColor {
+	background-color: var(--bgColorDark);
+}
+
 /* Add more common utility classes here */
 .text-box {
 	color: var(--box);
