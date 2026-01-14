@@ -48,7 +48,7 @@ export default function Home() {
 						<img
 							src={"/images/vega.png"}
 							alt="Vega Logo"
-							className="mx-auto mb-4 w-[71px]"
+							className="mx-auto mb-4 w-17.75"
 						/>
 					</h1>
 
