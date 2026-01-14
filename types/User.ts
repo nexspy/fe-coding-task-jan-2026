@@ -4,6 +4,7 @@ export type User = {
 	id: string;
 	fullName: string;
 	email: string;
+	password: string;
 	company: Company;
 	createdAt: string;
 	updatedAt: string;
@@ -14,6 +15,7 @@ export type UserCreatePayload = {
 	fullName: string;
 	email: string;
 	password: string;
+	companyName: string;
 	confirmPassword: string;
 	company: CompanyCreatePayload;
 };

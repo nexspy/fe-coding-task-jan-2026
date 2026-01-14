@@ -3,6 +3,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
 import { UserCreatePayload } from "@/types/User";
+import { UserService } from "@/services/User.service";
 
 export default function SignupPage() {
 	const {
@@ -12,8 +13,17 @@ export default function SignupPage() {
 		formState: { errors },
 	} = useForm<UserCreatePayload>();
 
-	const onSubmit: SubmitHandler<UserCreatePayload> = (data) => {
-		console.log("submitted data", data);
+	const onSubmit: SubmitHandler<UserCreatePayload> = async (data) => {
+		try {
+			const response = await UserService.save(data);
+			if (response && !response.success) {
+				alert(response.message);
+			} else {
+				alert("User registered successfully!");
+			}
+		} catch (error) {
+			console.error("Error registering user:", error);
+		}
 	};
 
 	return (
@@ -31,6 +41,28 @@ export default function SignupPage() {
 
 				{/* Form */}
 				<form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+					<div>
+						<input
+							type="text"
+							id="name"
+							className="mt-1 w-full rounded-md border border-border bg-background px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+							placeholder="Company Name"
+							{...register("companyName", {
+								required: "Company name is required",
+								minLength: {
+									value: 4,
+									message:
+										"Company name must be at least 4 characters",
+								},
+							})}
+						/>
+						{errors.companyName && (
+							<p className="text-sm text-red-500 mt-1">
+								{errors.companyName.message}
+							</p>
+						)}
+					</div>
+
 					<div>
 						<input
 							type="text"
