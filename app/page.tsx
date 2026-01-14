@@ -36,7 +36,7 @@ export default function Home() {
 				<div className="mb-6 text-center">
 					<h1 className="text-3xl font-semibold text-white">Login</h1>
 
-					<p>Welcome to Vega</p>
+					<p className="text-white">Welcome to Vega</p>
 
 					{/* Form */}
 					<form
@@ -46,7 +46,7 @@ export default function Home() {
 						<div>
 							<label
 								htmlFor="email"
-								className="block text-sm font-medium text-foreground"
+								className="block text-sm font-medium text-white"
 							>
 								Email
 							</label>
@@ -73,7 +73,7 @@ export default function Home() {
 						<div>
 							<label
 								htmlFor="password"
-								className="block text-sm font-medium text-foreground"
+								className="block text-sm font-medium text-white"
 							>
 								Password
 							</label>
