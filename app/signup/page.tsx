@@ -1,11 +1,14 @@
 "use client";
 
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { UserCreatePayload } from "@/types/User";
 import { UserService } from "@/services/User.service";
 
 export default function SignupPage() {
+	const router = useRouter();
+
 	const {
 		register,
 		handleSubmit,
@@ -20,6 +23,9 @@ export default function SignupPage() {
 				alert(response.message);
 			} else {
 				alert("User registered successfully!");
+
+				// navgigate to login page
+				router.push("/");
 			}
 		} catch (error) {
 			console.error("Error registering user:", error);
