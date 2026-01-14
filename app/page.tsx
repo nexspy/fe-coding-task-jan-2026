@@ -12,7 +12,6 @@ export default function Home() {
 	const {
 		register,
 		handleSubmit,
-		watch,
 		formState: { errors },
 	} = useForm<LoginPayload>();
 
@@ -23,6 +22,9 @@ export default function Home() {
 				alert(response.message);
 			} else {
 				alert("Login successful!");
+
+				// direct to dashboard
+				router.push("/dashboard");
 			}
 		} catch (error) {
 			console.error("Error during login:", error);
