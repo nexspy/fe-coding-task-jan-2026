@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { LoginPayload } from "@/types/Auth";
 import { UserService } from "@/services/User.service";
+import { AuthService } from "@/services/Auth.service";
+import { User } from "@/types/User";
 
 export default function Home() {
 	const router = useRouter();
@@ -15,13 +17,19 @@ export default function Home() {
 		formState: { errors },
 	} = useForm<LoginPayload>();
 
-	const onSubmit: SubmitHandler<LoginPayload> = async (data) => {
+	const onSubmit: SubmitHandler<LoginPayload> = async (
+		data: LoginPayload
+	) => {
 		try {
 			const response = await UserService.login(data);
 			if (response && !response.success) {
 				alert(response.message);
 			} else {
 				alert("Login successful!");
+
+				// Save current user to local storage
+				const user = response!.data as User;
+				AuthService.saveCurrentUser(user);
 
 				// direct to dashboard
 				router.push("/dashboard");
