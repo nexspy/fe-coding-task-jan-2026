@@ -33,9 +33,8 @@ Evaluation Criteria:
 
 Your task will be evaluated based on:
 
-Functionality: Does the application perform the tasks as required?
-
-1. Code Quality: Is the code clean, organised, and professional?
-2. UI/UX: Is the application easy to use, aesthetically pleasing, and responsive?
-3. Error Handling: Does the application handle potential errors gracefully?
-4. Documenta
+1. Functionality: Does the application perform the tasks as required?
+2. Code Quality: Is the code clean, organised, and professional?
+3. UI/UX: Is the application easy to use, aesthetically pleasing, and responsive?
+4. Error Handling: Does the application handle potential errors gracefully?
+5. Documenta
