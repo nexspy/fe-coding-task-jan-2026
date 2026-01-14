@@ -44,7 +44,13 @@ export default function Home() {
 			<div className="w-full max-w-md rounded-lg border border-border bg-box p-8 shadow-lg">
 				{/* Header */}
 				<div className="mb-6 text-center">
-					<h1 className="text-3xl font-semibold text-white">Login</h1>
+					<h1 className="text-3xl font-semibold text-white">
+						<img
+							src={"/images/vega.png"}
+							alt="Vega Logo"
+							className="mx-auto mb-4 w-[71px]"
+						/>
+					</h1>
 
 					<p className="text-white">Welcome to Vega</p>
 
