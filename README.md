@@ -14,6 +14,26 @@ For NextJs related documents [click here](./docs/NextJs.md)
 
 ## Run your project
 
+We can run this project either locally **using npm command** or we can **use docker**
+
+### Using Docker
+
+I would recommend using docker for running the project in consistent environment across multiple devices
+
+First time run use build
+
+```bash
+docker compose up --build
+```
+
+Then, from next time use this command
+
+```bash
+docker compose up
+```
+
+### NPM command
+
 Use this command to run the project.
 
 ```bash
