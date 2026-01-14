@@ -1,6 +1,21 @@
+"use client";
+
+import { useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
+import { UserCreatePayload } from "@/types/User";
 
 export default function SignupPage() {
+	const {
+		register,
+		handleSubmit,
+		watch,
+		formState: { errors },
+	} = useForm<UserCreatePayload>();
+
+	const onSubmit: SubmitHandler<UserCreatePayload> = (data) => {
+		console.log("submitted data", data);
+	};
+
 	return (
 		<div className="flex min-h-screen items-center justify-center bg-background px-4">
 			<div className="w-full max-w-md rounded-lg border border-border bg-box p-8 shadow-lg">
@@ -15,14 +30,27 @@ export default function SignupPage() {
 				</div>
 
 				{/* Form */}
-				<form className="space-y-4">
+				<form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
 					<div>
 						<input
 							type="text"
 							id="name"
 							className="mt-1 w-full rounded-md border border-border bg-background px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
 							placeholder="Full Name"
+							{...register("fullName", {
+								required: "Full name is required",
+								minLength: {
+									value: 6,
+									message:
+										"Full name must be at least 6 characters",
+								},
+							})}
 						/>
+						{errors.fullName && (
+							<p className="text-sm text-red-500 mt-1">
+								{errors.fullName.message}
+							</p>
+						)}
 					</div>
 
 					<div>
@@ -37,7 +65,19 @@ export default function SignupPage() {
 							id="email"
 							className="mt-1 w-full rounded-md border border-border bg-background px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
 							placeholder="you@example.com"
+							{...register("email", {
+								required: "Email is required",
+								pattern: {
+									value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+									message: "Invalid email address",
+								},
+							})}
 						/>
+						{errors.email && (
+							<p className="text-sm text-red-500 mt-1">
+								{errors.email.message}
+							</p>
+						)}
 					</div>
 
 					<div>
@@ -52,7 +92,20 @@ export default function SignupPage() {
 							id="password"
 							className="mt-1 w-full rounded-md border border-border bg-background px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
 							placeholder="••••••••"
+							{...register("password", {
+								required: "Password is required",
+								minLength: {
+									value: 8,
+									message:
+										"Password must be at least 8 characters",
+								},
+							})}
 						/>
+						{errors.password && (
+							<p className="text-sm text-red-500 mt-1">
+								{errors.password.message}
+							</p>
+						)}
 					</div>
 
 					<div>
@@ -67,7 +120,18 @@ export default function SignupPage() {
 							id="confirmPassword"
 							className="mt-1 w-full rounded-md border border-border bg-background px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
 							placeholder="••••••••"
+							{...register("confirmPassword", {
+								required: "Please confirm your password",
+								validate: (value) =>
+									value === watch("password") ||
+									"Passwords do not match",
+							})}
 						/>
+						{errors.confirmPassword && (
+							<p className="text-sm text-red-500 mt-1">
+								{errors.confirmPassword.message}
+							</p>
+						)}
 					</div>
 
 					<button
