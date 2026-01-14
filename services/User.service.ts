@@ -35,7 +35,6 @@ export class UserService {
 		const user = users.find(
 			(u) => u.email === data.email && u.password === data.password
 		);
-		console.log("user", user);
 
 		if (user) {
 			return {
