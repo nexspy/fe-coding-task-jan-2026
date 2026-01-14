@@ -10,6 +10,6 @@ For more details about the project's feature and its requirements [click here](.
 2. Typescript
 3. TailwindCSS
 
-## Run your projec
+## Run your project
 
 (coming soon...)
