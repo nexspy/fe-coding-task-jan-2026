@@ -1,9 +1,14 @@
 .bg-box {
 	background-color: var(--box);
 }
-
 .bg-bgColor {
 	background-color: var(--bgColorDark);
+}
+
+.bg-shadowImage {
+	background-image: url("/images/vega_bg_img.png");
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
 /* Add more common utility classes here */
