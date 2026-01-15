@@ -2,9 +2,10 @@
 
 import { useAssets } from "@/hooks/useAssets";
 import { Loading } from "./Loading";
-import { Asset, AssetView } from "@/types/portfolio/Asset";
+import { AssetView } from "@/types/portfolio/Asset";
 import { AssetAvatar } from "./AssetAvatar";
 import { Tag } from "../common/Tag";
+import { AssetService } from "@/services/Asset.service";
 
 /**
  * Table component - displays the company's portfolio in a tabular format
@@ -45,16 +46,8 @@ const PortfolioTableContent = ({ assets }: Props) => {
 			</thead>
 			<tbody>
 				{assets.map((asset) => {
-					console.log("asset", asset);
-
-					const latestPrice = asset.prices?.[0]?.price || 0;
-					const previousPrice =
-						asset.prices?.[1]?.price || latestPrice;
-					const priceChange = latestPrice - previousPrice;
-					const priceChangePercent =
-						previousPrice > 0
-							? ((priceChange / previousPrice) * 100).toFixed(2)
-							: "0.00";
+					const { priceChange, priceChangePercent, latestPrice } =
+						AssetService.calculatePriceChange(asset);
 
 					return (
 						<tr key={asset.id}>
