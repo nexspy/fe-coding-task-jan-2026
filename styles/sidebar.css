@@ -5,3 +5,12 @@
 .active-menu {
 	background-color: var(--menuHighlight);
 }
+/* Add to globals.css or common.css */
+.mobile-menu-slide {
+	transition: transform 300ms ease-in-out;
+	transform: translateX(-100%);
+}
+
+.mobile-menu-slide.open {
+	transform: translateX(0);
+}

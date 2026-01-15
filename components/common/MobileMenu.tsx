@@ -26,12 +26,16 @@ export const MobileMenu = () => {
 				)}
 			</button>
 
-			{isMobileMenuOpen && <MobileMenuNav />}
+			<MobileMenuNav isMobileMenuOpen={isMobileMenuOpen} />
 		</div>
 	);
 };
 
-const MobileMenuNav = () => {
+interface MenuProps {
+	isMobileMenuOpen: boolean;
+}
+
+const MobileMenuNav = ({ isMobileMenuOpen }: MenuProps) => {
 	const pathname = usePathname();
 	const router = useRouter();
 	const { user } = useAuth();
@@ -58,10 +62,16 @@ const MobileMenuNav = () => {
 	return (
 		<>
 			{/* Overlay */}
-			<div className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-40 opacity-70" />
+			{isMobileMenuOpen && (
+				<div className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-40 opacity-70" />
+			)}
 
 			{/* Sidebar for small devices */}
-			<div className="flex flex-col md:hidden fixed inset-y-0 left-0 w-64 bg-sidebar z-50 ">
+			<div
+				className={`flex flex-col md:hidden fixed inset-y-0 left-0 w-64 bg-sidebar z-50 mobile-menu-slide ${
+					isMobileMenuOpen ? "open" : ""
+				}`}
+			>
 				{/* Logo */}
 				<div className="flex items-center justify-center h-16 gap-2 bg-gray-400">
 					<img
