@@ -101,7 +101,7 @@ export const AssetChart = () => {
 
 	return (
 		<div>
-			<h2 className="font-bold">Assets</h2>
+			<h2 className="font-bold">Portfolio Balance</h2>
 
 			<div className="w-full md:w-[50%] mx-auto">
 				{loading ? (
