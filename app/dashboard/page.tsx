@@ -3,6 +3,7 @@
 import { AssetChart } from "@/components/dashboard/AssetChart";
 import { ItemBox } from "@/components/dashboard/ItemBox";
 import { PortfolioChart } from "@/components/dashboard/PortfolioChart";
+import { PortfolioTable } from "@/components/dashboard/PortfolioTable";
 import ProtectedRoute from "@/components/ProtectedRoute";
 
 const PageContent = () => {
@@ -22,6 +23,13 @@ const PageContent = () => {
 
 				<ItemBox>
 					<PortfolioChart />
+				</ItemBox>
+			</div>
+
+			{/* Single row grid with only table */}
+			<div className="grid grid-cols-1 gap-4 w-full mb-4">
+				<ItemBox>
+					<PortfolioTable />
 				</ItemBox>
 			</div>
 		</>
