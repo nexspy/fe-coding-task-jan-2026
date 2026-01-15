@@ -10,6 +10,7 @@ import { User } from "@/types/User";
 import { UserService } from "@/services/User.service";
 import { AuthService } from "@/services/Auth.service";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
+import { toast } from "react-toastify";
 
 export default function Home() {
 	const router = useRouter();
@@ -26,9 +27,10 @@ export default function Home() {
 		try {
 			const response = await UserService.login(data);
 			if (response && !response.success) {
-				alert(response.message);
+				toast.error(response.message);
+				// alert(response.message);
 			} else {
-				alert("Login successful!");
+				toast.success("Login successful!");
 
 				// Save current user to local storage
 				const user = response!.data as User;
