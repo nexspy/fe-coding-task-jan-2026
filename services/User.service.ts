@@ -28,7 +28,9 @@ export class UserService {
 	 * @param data
 	 * @returns
 	 */
-	static async login(data: LoginPayload): Promise<ServerResponse | null> {
+	static async login(
+		data: LoginPayload
+	): Promise<ServerResponse<User> | null> {
 		const users = await this.getAllUsers();
 
 		// check if email and password match
@@ -63,7 +65,9 @@ export class UserService {
 	 * @param data
 	 * @returns
 	 */
-	static async save(data: UserCreatePayload): Promise<ServerResponse | null> {
+	static async save(
+		data: UserCreatePayload
+	): Promise<ServerResponse<User> | null> {
 		let users = await this.getAllUsers();
 
 		// Check if user already exists

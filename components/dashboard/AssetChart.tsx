@@ -1,52 +1,114 @@
 "use client";
 
+import { useAssets } from "@/hooks/useAssets";
+import { Asset, AssetType } from "@/types/portfolio/Asset";
 /**
  * Chart component for displaying asset data
  *  - this can be used in dashboard page
  */
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
+import { Loading } from "./Loading";
+import { COLORS } from "@/config/colors";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const AssetChart = () => {
-	const data = {
-		labels: ["Stocks", "Crypto", "Flat"],
-		datasets: [
-			{
-				label: "Assets",
-				data: [35, 25, 20],
-				backgroundColor: ["#B26C2D", "#D0B162", "#CCCCCC"],
-			},
-		],
-	};
+type ChartData = {
+	labels: AssetType[];
+	datasets: {
+		label: string;
+		data: number[];
+		backgroundColor: string[];
+	}[];
+};
 
-	const options = {
-		responsive: true,
-		maintainAspectRatio: true,
-		plugins: {
-			legend: {
-				position: "bottom" as const,
-			},
-			tooltip: {
-				callbacks: {
-					label: function (context: any) {
-						const label = context.label || "";
-						const value = context.parsed || 0;
-						return `${label}: ${value}%`;
-					},
+const defaultData: ChartData = {
+	labels: [AssetType.STOCK, AssetType.CRYPTO, AssetType.FLAT],
+	datasets: [],
+};
+
+// initialise chart options
+const chartOptions = {
+	responsive: true,
+	maintainAspectRatio: true,
+	plugins: {
+		legend: {
+			position: "bottom" as const,
+		},
+		tooltip: {
+			callbacks: {
+				label: function (context: any) {
+					const label = context.label || "";
+					const value = context.parsed || 0;
+					return `${label}: ${value}%`;
 				},
 			},
 		},
+	},
+};
+
+export const AssetChart = () => {
+	const [data, setData] = useState<ChartData>(defaultData);
+	const { assets, loading } = useAssets();
+
+	/**
+	 * Map the assets into data format required by chartjs
+	 * @param assets Asset[]
+	 */
+	const mapAssetsToChartData = (assets: Asset[]) => {
+		if (assets.length === 0) return;
+
+		const typeCount: Record<AssetType, number> = {
+			[AssetType.STOCK]: 0,
+			[AssetType.CRYPTO]: 0,
+			[AssetType.FLAT]: 0,
+		};
+
+		assets.forEach((asset) => {
+			typeCount[asset.type]++;
+		});
+
+		const totalAssets = assets.length;
+		const dataValues = Object.values(typeCount).map((count) => {
+			const value = (count / totalAssets) * 100;
+			return parseFloat(value.toFixed(2));
+		});
+
+		const backgroundColors = [
+			COLORS.primary, // STOCK
+			COLORS.secondary, // CRYPTO
+			COLORS.accent, // FLAT
+		];
+
+		setData({
+			labels: Object.keys(typeCount) as AssetType[],
+			datasets: [
+				{
+					label: "Asset Distribution",
+					data: dataValues,
+					backgroundColor: backgroundColors,
+				},
+			],
+		});
 	};
+
+	useEffect(() => {
+		// map assets to dataset of chart
+		mapAssetsToChartData(assets);
+	}, [assets]);
 
 	return (
 		<div>
 			<h2 className="font-bold">Assets</h2>
 
 			<div className="w-full md:w-[50%] mx-auto">
-				<Doughnut data={data} options={options} />
+				{loading ? (
+					<Loading />
+				) : (
+					<Doughnut data={data} options={chartOptions} />
+				)}
 			</div>
 		</div>
 	);
