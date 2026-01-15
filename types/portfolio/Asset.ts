@@ -8,9 +8,9 @@
 import { PriceInAsset } from "./Price";
 
 export enum AssetType {
-	STOCK = "stock",
-	CRYPTO = "cryptocurrency",
-	FLAT = "fiat",
+	STOCK = "Stock",
+	CRYPTO = "Cryptocurrency",
+	FLAT = "Flat",
 }
 
 export type Asset = {

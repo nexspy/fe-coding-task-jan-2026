@@ -6,7 +6,7 @@
  */
 
 import { useAssets } from "@/hooks/useAssets";
-import { Asset, AssetType } from "@/types/portfolio/Asset";
+import { Asset, AssetType, AssetView } from "@/types/portfolio/Asset";
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { useEffect, useState } from "react";
@@ -58,7 +58,7 @@ export const AssetChart = () => {
 	 * Map the assets into data format required by chartjs
 	 * @param assets Asset[]
 	 */
-	const mapAssetsToChartData = (assets: Asset[]) => {
+	const mapAssetsToChartData = (assets: AssetView[]) => {
 		if (assets.length === 0) return;
 
 		const typeCount: Record<AssetType, number> = {

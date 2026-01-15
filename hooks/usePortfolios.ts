@@ -1,38 +1,25 @@
 /**
  * Hook: usePortfolios()
  */
-import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { PortfolioService } from "@/services/Portfolio.service";
 import { Portfolio } from "@/types/portfolio/Portfolio";
 
 export const usePortfolios = () => {
-	const [portfolios, setPortfolios] = useState<Portfolio[]>([]);
-	const [loading, setLoading] = useState<boolean>(true);
-	const [error, setError] = useState<string | null>(null);
-
-	const fetchPortfolios = async () => {
-		try {
-			setLoading(true);
-
-			const data = await PortfolioService.getAllPortfolios();
-
-			setPortfolios(data);
-			setError(null);
-		} catch (err) {
-			setError(
-				err instanceof Error
-					? err.message
-					: "Failed to fetch portfolios"
-			);
-			setPortfolios([]);
-		} finally {
-			setLoading(false);
-		}
-	};
-
-	useEffect(() => {
-		fetchPortfolios();
-	}, []);
+	const {
+		data: portfolios = [],
+		isLoading: loading,
+		error,
+		refetch: fetchPortfolios,
+	} = useQuery<Portfolio[]>({
+		queryKey: ["portfolios"],
+		queryFn: async () => {
+			const response = await PortfolioService.getAllPortfolios();
+			return response;
+		},
+		// Refetch every 20 seconds
+		refetchInterval: 20000,
+	});
 
 	return { portfolios, loading, error, fetchPortfolios };
 };

@@ -1,4 +1,5 @@
-import { Asset, AssetType } from "@/types/portfolio/Asset";
+import { Asset, AssetType, AssetView } from "@/types/portfolio/Asset";
+import { generateUUID } from "@/utils/uuid";
 import { NextResponse } from "next/server";
 
 /**
@@ -9,41 +10,86 @@ export async function GET() {
 	// Simulate API delay
 	await new Promise((resolve) => setTimeout(resolve, 500));
 
-	const assets: Asset[] = [
+	const assets: AssetView[] = [
 		{
-			id: "1",
+			id: generateUUID(),
 			name: "Bitcoin",
 			symbol: "BTC",
 			type: AssetType.CRYPTO,
-			prices: ["101", "102"],
+			prices: [
+				{
+					id: generateUUID(),
+					price: 4000.0,
+				},
+				{
+					id: generateUUID(),
+					price: 3100.0,
+				},
+			],
 		},
 		{
-			id: "2",
+			id: generateUUID(),
 			name: "Ethereum",
 			symbol: "ETH",
 			type: AssetType.CRYPTO,
-			prices: ["201", "202"],
+			prices: [
+				{
+					id: generateUUID(),
+					price: 1000.0,
+				},
+				{
+					id: generateUUID(),
+					price: 2100.0,
+				},
+			],
 		},
 		{
-			id: "3",
+			id: generateUUID(),
 			name: "US Dollar",
 			symbol: "USD",
 			type: AssetType.FLAT,
-			prices: ["301", "302"],
+			prices: [
+				{
+					id: generateUUID(),
+					price: 3000.0,
+				},
+				{
+					id: generateUUID(),
+					price: 8100.0,
+				},
+			],
 		},
 		{
-			id: "4",
+			id: generateUUID(),
 			name: "Apple Inc.",
 			symbol: "AAPL",
 			type: AssetType.STOCK,
-			prices: ["401", "402"],
+			prices: [
+				{
+					id: generateUUID(),
+					price: 4000.0,
+				},
+				{
+					id: generateUUID(),
+					price: 4100.0,
+				},
+			],
 		},
 		{
-			id: "5",
+			id: generateUUID(),
 			name: "Tesla Inc.",
 			symbol: "TSLA",
 			type: AssetType.STOCK,
-			prices: ["501", "502"],
+			prices: [
+				{
+					id: generateUUID(),
+					price: 2000.0,
+				},
+				{
+					id: generateUUID(),
+					price: 2100.0,
+				},
+			],
 		},
 	];
 

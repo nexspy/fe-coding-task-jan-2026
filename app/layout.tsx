@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
+import { QueryProvider } from "@/components/QueryProvider";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -29,8 +30,10 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
-				<ThemeToggle />
-				{children}
+				<QueryProvider>
+					<ThemeToggle />
+					{children}
+				</QueryProvider>
 			</body>
 		</html>
 	);

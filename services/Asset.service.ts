@@ -1,12 +1,11 @@
-import { Asset, AssetType } from "@/types/portfolio/Asset";
-import { ServerResponse } from "@/types/Server";
+import { Asset, AssetType, AssetView } from "@/types/portfolio/Asset";
 
 export class AssetService {
 	/**
 	 * Get all assets
 	 * @returns List of assets
 	 */
-	static async getAllAssets(): Promise<Asset[]> {
+	static async getAllAssets(): Promise<AssetView[]> {
 		try {
 			const response = await fetch("/api/assets");
 			const result = await response.json();
