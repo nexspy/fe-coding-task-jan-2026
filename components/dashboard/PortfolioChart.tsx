@@ -27,6 +27,7 @@ import { Loading } from "./Loading";
 import { PriceInAsset } from "@/types/portfolio/Price";
 import { PositionView } from "@/types/portfolio/Position";
 import { getLastMonthsLabels } from "@/utils/date";
+import { FailedBox } from "../common/FailedBox";
 
 ChartJS.register(
 	CategoryScale,
@@ -152,7 +153,13 @@ export const PortfolioChart = () => {
 				{loading ? (
 					<Loading />
 				) : (
-					<Line data={data} options={lineChartOptions} />
+					<>
+						{error ? (
+							<FailedBox message="Failed to load portfolio performance data." />
+						) : (
+							<Line data={data} options={lineChartOptions} />
+						)}
+					</>
 				)}
 			</div>
 		</div>
