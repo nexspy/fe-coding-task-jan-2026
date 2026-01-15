@@ -49,7 +49,7 @@ export const Sidebar = () => {
 	};
 
 	return (
-		<div className="flex flex-col w-64 bg-sidebar">
+		<div className="hidden md:flex flex-col w-64 bg-sidebar">
 			{/* Logo */}
 			<div className="flex items-center justify-center h-16 gap-2 bg-gray-400">
 				<img
