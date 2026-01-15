@@ -15,7 +15,7 @@ export default function NotFound() {
 						<h2 className="text-xl font-semibold tracking-tight text-foreground">
 							Page Not Found
 						</h2>
-						<p className="text-lg text-muted dark:text-foreground/60">
+						<p className="text-lg text-primary dark:text-foreground/60">
 							Could not find the requested resource
 						</p>
 					</div>
