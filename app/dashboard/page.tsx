@@ -2,6 +2,7 @@
 
 import { AssetChart } from "@/components/dashboard/AssetChart";
 import { ItemBox } from "@/components/dashboard/ItemBox";
+import { PortfolioChart } from "@/components/dashboard/PortfolioChart";
 import ProtectedRoute from "@/components/ProtectedRoute";
 
 const PageContent = () => {
@@ -20,7 +21,7 @@ const PageContent = () => {
 				</ItemBox>
 
 				<ItemBox>
-					<AssetChart />
+					<PortfolioChart />
 				</ItemBox>
 			</div>
 		</>
