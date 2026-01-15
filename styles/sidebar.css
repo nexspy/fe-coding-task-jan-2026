@@ -2,6 +2,10 @@
 	background-color: var(--bgCream);
 }
 
+.bg-logo {
+	background-color: var(--bgLogo);
+}
+
 .active-menu {
 	background-color: var(--menuHighlight);
 }

@@ -21,6 +21,7 @@
 	--box: #181818;
 	--bgColorDark: #171717;
 	--bgCream: #f2f1ef;
+	--bgLogo: #fac252;
 	--menuHighlight: #eae4d8;
 	--themed-text: black;
 }
@@ -42,8 +43,9 @@
 
 	--box: #181818;
 	--bgColorDark: #171717;
-	--bgCream: #f2f1ef;
-	--menuHighlight: #c0a775;
+	--bgCream: #484848;
+	--bgLogo: #292113;
+	--menuHighlight: #7f580a;
 	--themed-text: white;
 }
 
