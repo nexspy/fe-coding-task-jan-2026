@@ -5,6 +5,7 @@
  *  - this can be used in dashboard page
  */
 
+import { useEffect, useState } from "react";
 import {
 	Chart as ChartJS,
 	CategoryScale,
@@ -16,10 +17,11 @@ import {
 	Legend,
 	Filler,
 } from "chart.js";
+import { toast } from "react-toastify";
+
 import { Line } from "react-chartjs-2";
 import { COLORS } from "@/config/colors";
 import { usePortfolios } from "@/hooks/usePortfolios";
-import { useEffect, useState } from "react";
 import { Portfolio } from "@/types/portfolio/Portfolio";
 import { Loading } from "./Loading";
 import { PriceInAsset } from "@/types/portfolio/Price";
@@ -90,7 +92,7 @@ const lineChartOptions = {
 
 export const PortfolioChart = () => {
 	const [data, setData] = useState<LineChartData>(defaultData);
-	const { portfolios, loading } = usePortfolios();
+	const { portfolios, loading, error } = usePortfolios();
 
 	const mapPortfoliosToLineChartData = (portfolios: Portfolio[]) => {
 		if (portfolios.length === 0) return;
@@ -128,6 +130,16 @@ export const PortfolioChart = () => {
 			],
 		});
 	};
+
+	useEffect(() => {
+		if (!error) return;
+
+		// show toast for error
+		console.log("error", error);
+		toast.error(`Error fetching portfolio performance`, {
+			position: "top-right",
+		});
+	}, [error]);
 
 	useEffect(() => {
 		mapPortfoliosToLineChartData(portfolios);

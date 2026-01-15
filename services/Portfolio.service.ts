@@ -21,7 +21,7 @@ export class PortfolioService {
 			throw new Error("Failed to fetch portfolios");
 		} catch (error) {
 			console.error("Error fetching portfolios:", error);
-			return [];
+			throw error;
 		}
 	}
 }
