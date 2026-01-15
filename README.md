@@ -47,3 +47,9 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Directories
+
+Here is how the project files and directories are managed.
+
+[View](./docs/Directories.md)
