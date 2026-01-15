@@ -4,6 +4,7 @@ import { useAssets } from "@/hooks/useAssets";
 import { Loading } from "./Loading";
 import { Asset, AssetView } from "@/types/portfolio/Asset";
 import { AssetAvatar } from "./AssetAvatar";
+import { Tag } from "../common/Tag";
 
 /**
  * Table component - displays the company's portfolio in a tabular format
@@ -45,6 +46,7 @@ const PortfolioTableContent = ({ assets }: Props) => {
 			<tbody>
 				{assets.map((asset) => {
 					console.log("asset", asset);
+
 					const latestPrice = asset.prices?.[0]?.price || 0;
 					const previousPrice =
 						asset.prices?.[1]?.price || latestPrice;
@@ -59,7 +61,9 @@ const PortfolioTableContent = ({ assets }: Props) => {
 							<td className="p-2">
 								<AssetAvatar asset={asset} />
 							</td>
-							<td className="p-2 capitalize">{asset.type}</td>
+							<td className="p-2 capitalize">
+								<Tag>{asset.type}</Tag>
+							</td>
 							<td className="p-2 text-right">
 								£{latestPrice.toLocaleString()}
 							</td>
