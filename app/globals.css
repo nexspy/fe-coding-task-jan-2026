@@ -18,6 +18,7 @@
 	--bgColorDark: #171717;
 	--bgCream: #f2f1ef;
 	--menuHighlight: #eae4d8;
+	--themed-text: black;
 }
 
 .dark {
@@ -34,7 +35,8 @@
 	--box: #181818;
 	--bgColorDark: #171717;
 	--bgCream: #f2f1ef;
-	--menuHighlight: #eae4d8;
+	--menuHighlight: #c0a775;
+	--themed-text: white;
 }
 
 @theme inline {

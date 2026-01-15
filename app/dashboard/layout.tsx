@@ -12,7 +12,7 @@ interface DashboardLayoutProps {
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
 	return (
 		<ProtectedRoute>
-			<div className="flex h-screen bg-gray-100">
+			<div className="flex h-screen">
 				<MobileMenu />
 
 				<Sidebar />

@@ -17,7 +17,7 @@ export const MobileMenu = () => {
 		<div>
 			<button
 				onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-				className="md:hidden fixed top-4 right-4 z-50 p-2 rounded-lg bg-sidebar "
+				className="md:hidden fixed top-4 right-4 z-50 p-2 rounded-lg"
 			>
 				{isMobileMenuOpen ? (
 					<IoClose size={24} />
@@ -112,13 +112,13 @@ const MobileMenuNav = ({ isMobileMenuOpen }: MenuProps) => {
 							</span>
 						</div>
 						<div className="ml-3 flex flex-col gap-1">
-							<p className="text-sm font-medium">
+							<p className="text-sm text-black font-medium">
 								{user?.fullName}
 							</p>
 							<p className="text-xs text-gray-400">
 								{user?.email}
 							</p>
-							<p className="flex items-center gap-1 text-sm">
+							<p className="flex items-center gap-1 text-sm text-black">
 								<RiLogoutBoxLine />
 								<button
 									type="button"

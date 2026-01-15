@@ -14,3 +14,7 @@
 .mobile-menu-slide.open {
 	transform: translateX(0);
 }
+
+.sidebar-bottom {
+	color: var(--themed-text);
+}
