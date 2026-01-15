@@ -1,13 +1,12 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import { MenuItem, menuItems } from "./Sidebar";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "../AuthProvider";
-import { RiLogoutBoxLine } from "react-icons/ri";
 import { AuthService } from "@/services/Auth.service";
 import { ConfirmationModal } from "./ConfirmationModal";
 import { MenuBottom } from "./MenuBottom";
@@ -17,16 +16,18 @@ export const MobileMenu = () => {
 
 	return (
 		<div>
-			<button
-				onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-				className="md:hidden fixed top-4 right-4 z-50 p-2 rounded-lg burger-menu"
-			>
-				{isMobileMenuOpen ? (
-					<IoClose size={24} className="text-foreground" />
-				) : (
-					<HiMenuAlt3 size={24} className="text-foreground" />
-				)}
-			</button>
+			<div className="relative z-50">
+				<button
+					onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+					className="md:hidden p-2 rounded-lg burger-menu"
+				>
+					{isMobileMenuOpen ? (
+						<IoClose size={24} className="text-foreground" />
+					) : (
+						<HiMenuAlt3 size={24} className="text-foreground" />
+					)}
+				</button>
+			</div>
 
 			<MobileMenuNav isMobileMenuOpen={isMobileMenuOpen} />
 		</div>
@@ -43,16 +44,6 @@ const MobileMenuNav = ({ isMobileMenuOpen }: MenuProps) => {
 	const { user } = useAuth();
 
 	const [showLogoutModal, setShowLogoutModal] = useState(false);
-
-	// use for avatar initials
-	const userInitials = useMemo(() => {
-		return user
-			? user.fullName
-					.split(" ")
-					.map((namePart) => namePart.charAt(0).toUpperCase())
-					.join("")
-			: "";
-	}, [user]);
 
 	// logout user using the service class
 	const logoutUser = () => {
@@ -74,12 +65,12 @@ const MobileMenuNav = ({ isMobileMenuOpen }: MenuProps) => {
 		<>
 			{/* Overlay */}
 			{isMobileMenuOpen && (
-				<div className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-40 opacity-70" />
+				<div className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-30 opacity-30" />
 			)}
 
 			{/* Sidebar for small devices */}
 			<div
-				className={`flex flex-col md:hidden fixed inset-y-0 left-0 w-64 bg-sidebar z-50 mobile-menu-slide ${
+				className={`flex flex-col md:hidden fixed inset-y-0 left-0 w-64 bg-sidebar z-40 mobile-menu-slide ${
 					isMobileMenuOpen ? "open" : ""
 				}`}
 			>

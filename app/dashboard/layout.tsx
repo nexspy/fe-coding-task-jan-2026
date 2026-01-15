@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { Sidebar } from "@/components/common/Sidebar";
-import { MobileMenu } from "@/components/common/MobileMenu";
+import { TopActions } from "@/components/common/TopActions";
 
 interface DashboardLayoutProps {
 	children: ReactNode;
@@ -14,7 +14,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 	return (
 		<ProtectedRoute>
 			<div className="flex h-screen">
-				<MobileMenu />
+				<TopActions />
 
 				<Sidebar />
 
