@@ -1,4 +1,4 @@
-import { Asset, AssetType, AssetView } from "@/types/portfolio/Asset";
+import { AssetType, AssetView } from "@/types/portfolio/Asset";
 import { generateUUID } from "@/utils/uuid";
 import { NextResponse } from "next/server";
 

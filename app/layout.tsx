@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
-import { ThemeToggle } from "@/components/common/ThemeToggle";
 import { QueryProvider } from "@/components/QueryProvider";
 import { ToastContainer } from "react-toastify";
 
