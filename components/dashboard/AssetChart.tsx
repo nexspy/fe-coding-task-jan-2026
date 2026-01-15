@@ -143,7 +143,6 @@ export const AssetChart = () => {
 
 	const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const value = e.target.value as FilterOptions;
-		console.log("Selected filter:", value);
 
 		// triggers re-mapping of data based on filter
 		setCurrentFilter(value);
