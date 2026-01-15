@@ -14,6 +14,8 @@ import { Doughnut } from "react-chartjs-2";
 import { Loading } from "./Loading";
 import { COLORS } from "@/config/colors";
 import { toast } from "react-toastify";
+import { BiSolidMessageAltError } from "react-icons/bi";
+import { FailedBox } from "../common/FailedBox";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -118,7 +120,13 @@ export const AssetChart = () => {
 				{loading ? (
 					<Loading />
 				) : (
-					<Doughnut data={data} options={chartOptions} />
+					<>
+						{error ? (
+							<FailedBox message="Failed to load asset data" />
+						) : (
+							<Doughnut data={data} options={chartOptions} />
+						)}
+					</>
 				)}
 			</div>
 		</div>
