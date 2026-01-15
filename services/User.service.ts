@@ -36,6 +36,9 @@ export class UserService {
 		const users = await this.getAllUsers();
 		const hashedPassword = await hashPassword(data.password);
 
+		// check for lower case email
+		data.email = data.email.toLowerCase();
+
 		// check if email and password match
 		const user = users.find(
 			(u) => u.email === data.email && u.password === hashedPassword
