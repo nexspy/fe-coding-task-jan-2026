@@ -1,5 +1,5 @@
-export type ServerResponse = {
+export type ServerResponse<T> = {
 	success: boolean;
 	message: string;
-	data?: any;
+	data?: T;
 };
