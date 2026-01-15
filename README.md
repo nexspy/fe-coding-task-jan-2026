@@ -59,3 +59,7 @@ Here is how the project files and directories are managed.
 Related and interacting units of the platform are described here
 
 [View](./docs/Entities.md)
+
+## System Design (analysis)
+
+[View System Design](https://drive.google.com/file/d/17N1jHjZVXVCSZ94Fy5GzErXTmNflZzgN/view?usp=sharing)
