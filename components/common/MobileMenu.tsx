@@ -18,7 +18,7 @@ export const MobileMenu = () => {
 		<div>
 			<button
 				onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-				className="md:hidden fixed top-4 right-4 z-50 p-2 rounded-lg"
+				className="md:hidden fixed top-4 right-4 z-50 p-2 rounded-lg burger-menu"
 			>
 				{isMobileMenuOpen ? (
 					<IoClose size={24} />
