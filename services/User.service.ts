@@ -6,6 +6,7 @@ import { Company, CompanyCreatePayload } from "@/types/Company";
 import { Portfolio } from "@/types/portfolio/Portfolio";
 import { ServerResponse } from "@/types/Server";
 import { User, UserCreatePayload } from "@/types/User";
+import { hashPassword } from "@/utils/password";
 import { generateUUID } from "@/utils/uuid";
 
 export class UserService {
@@ -33,10 +34,11 @@ export class UserService {
 		data: LoginPayload
 	): Promise<ServerResponse<User> | null> {
 		const users = await this.getAllUsers();
+		const hashedPassword = await hashPassword(data.password);
 
 		// check if email and password match
 		const user = users.find(
-			(u) => u.email === data.email && u.password === data.password
+			(u) => u.email === data.email && u.password === hashedPassword
 		);
 
 		if (user) {
@@ -98,12 +100,14 @@ export class UserService {
 			portfolios: [newPortfolio.id],
 		};
 
+		let hashedValue = await hashPassword(data.password);
+
 		let newUser: User = {
 			id: generateUUID(),
 			fullName: data.fullName,
 			email: data.email,
 			//TODO hash the password before saving
-			password: data.password,
+			password: hashedValue,
 			company: newCompany,
 			createdAt: new Date().toISOString(),
 			updatedAt: new Date().toISOString(),
