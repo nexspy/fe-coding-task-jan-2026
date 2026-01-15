@@ -63,3 +63,7 @@ Related and interacting units of the platform are described here
 ## System Design (analysis)
 
 [View System Design](https://drive.google.com/file/d/17N1jHjZVXVCSZ94Fy5GzErXTmNflZzgN/view?usp=sharing)
+
+## Figma UX Prototype
+
+[View Figma Design](https://www.figma.com/design/9cgsqlU4hmNDtx6wILiUTb/Dashboard-Prototype?node-id=0-1&t=bCOi2YLIchTo3m2j-1)
