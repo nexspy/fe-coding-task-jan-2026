@@ -16,7 +16,7 @@ For NextJs related documents [click here](./docs/NextJs.md)
 
 Demo application has been hosted in **Netlify platform**
 
-[Demo]("https://demo-investment-portfolio.netlify.app/")
+[Demo](https://demo-investment-portfolio.netlify.app/)
 
 ## Run your project
 
