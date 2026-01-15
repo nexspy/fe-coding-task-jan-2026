@@ -58,10 +58,10 @@ const MobileMenuNav = () => {
 	return (
 		<>
 			{/* Overlay */}
-			<div className="fixed inset-0 bg-black bg-opacity-50 z-40" />
+			<div className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-40 opacity-70" />
 
-			{/* Sidebar */}
-			<div className="fixed inset-y-0 left-0 w-64 bg-sidebar z-50 flex flex-col">
+			{/* Sidebar for small devices */}
+			<div className="flex flex-col md:hidden fixed inset-y-0 left-0 w-64 bg-sidebar z-50 ">
 				{/* Logo */}
 				<div className="flex items-center justify-center h-16 gap-2 bg-gray-400">
 					<img
