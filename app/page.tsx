@@ -1,12 +1,14 @@
 "use client";
 
+import { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+
 import { LoginPayload } from "@/types/Auth";
+import { User } from "@/types/User";
 import { UserService } from "@/services/User.service";
 import { AuthService } from "@/services/Auth.service";
-import { User } from "@/types/User";
 
 export default function Home() {
 	const router = useRouter();
@@ -38,6 +40,14 @@ export default function Home() {
 			console.error("Error during login:", error);
 		}
 	};
+
+	useEffect(() => {
+		// Check if user is already logged in
+		const user = AuthService.getCurrentUser();
+		if (user) {
+			router.push("/dashboard");
+		}
+	}, []);
 
 	return (
 		<div className="flex min-h-screen items-center justify-center bg-bgColor bg-shadowImage px-4">

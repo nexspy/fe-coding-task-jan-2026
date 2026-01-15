@@ -1,8 +1,9 @@
 "use client";
 
 import { ReactNode } from "react";
-import { Sidebar } from "@/components/common/Sidebar";
+
 import ProtectedRoute from "@/components/ProtectedRoute";
+import { Sidebar } from "@/components/common/Sidebar";
 import { MobileMenu } from "@/components/common/MobileMenu";
 
 interface DashboardLayoutProps {

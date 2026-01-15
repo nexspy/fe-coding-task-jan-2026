@@ -6,11 +6,15 @@
  **/
 
 import { useEffect, useState } from "react";
+import { MdOutlineDarkMode } from "react-icons/md";
+import { FiSun } from "react-icons/fi";
 
 export enum ThemeMode {
 	Light = "light",
 	Dark = "dark",
 }
+
+const ICON_SIZE = 24;
 
 export function ThemeToggle() {
 	const [theme, setTheme] = useState<ThemeMode>(ThemeMode.Light);
@@ -41,7 +45,11 @@ export function ThemeToggle() {
 			onClick={toggleTheme}
 			className="bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:opacity-90 absolute top-4 right-16 md:right-4 "
 		>
-			{theme === ThemeMode.Light ? "🌙 Dark" : "☀️ Light"}
+			{theme === ThemeMode.Light ? (
+				<MdOutlineDarkMode size={ICON_SIZE} />
+			) : (
+				<FiSun size={ICON_SIZE} />
+			)}
 		</button>
 	);
 }

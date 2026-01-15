@@ -1,8 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+
 import { UserCreatePayload } from "@/types/User";
 import { UserService } from "@/services/User.service";
 
