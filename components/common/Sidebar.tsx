@@ -10,7 +10,8 @@ import { usePathname, useRouter } from "next/navigation";
 
 import { AuthService } from "@/services/Auth.service";
 import { useAuth } from "@/components/AuthProvider";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import { ConfirmationModal } from "./ConfirmationModal";
 
 export type MenuItem = {
 	name: string;
@@ -26,6 +27,7 @@ export const Sidebar = () => {
 	const router = useRouter();
 	const pathname = usePathname();
 	const { user } = useAuth();
+	const [showLogoutModal, setShowLogoutModal] = useState(false);
 
 	// use for avatar initials
 	const userInitials = useMemo(() => {
@@ -38,14 +40,15 @@ export const Sidebar = () => {
 	}, [user]);
 
 	const handleLogoutClick = () => {
-		try {
-			AuthService.logout();
+		setShowLogoutModal(true);
 
-			// redirect to login page
-			router.push("/");
-		} catch (error) {
-			console.error("Logout failed:", error);
-		}
+		// try {
+		// 	AuthService.logout();
+		// 	// redirect to login page
+		// 	router.push("/");
+		// } catch (error) {
+		// 	console.error("Logout failed:", error);
+		// }
 	};
 
 	return (
@@ -105,6 +108,22 @@ export const Sidebar = () => {
 					</div>
 				</div>
 			</div>
+
+			{/* Logout modal */}
+			{showLogoutModal && (
+				<ConfirmationModal
+					open={showLogoutModal}
+					title="Logout"
+					text={
+						"Do you want to logout? You will need to sign in again to access your dashboard."
+					}
+					textYes={"Logout"}
+					onOpenChange={setShowLogoutModal}
+					onConfirm={() => {
+						console.log("out");
+					}}
+				/>
+			)}
 		</div>
 	);
 };
