@@ -10,20 +10,23 @@ export default function ProtectedRoute({
 	children: React.ReactNode;
 }) {
 	const router = useRouter();
+	const [isAuthenticated, setIsAuthenticated] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		if (!AuthService.isAuthenticated()) {
+		const authenticated = AuthService.isAuthenticated();
+		if (!authenticated) {
 			router.push("/");
 		} else {
-			setIsLoading(false);
+			setIsAuthenticated(true);
 		}
+		setIsLoading(false);
 	}, [router]);
 
-	if (isLoading) {
+	if (isLoading || !isAuthenticated) {
 		return (
 			<div className="flex items-center justify-center min-h-screen">
-				<div className="text-lg">Loading...</div>
+				<div className="text-lg">Authenticating...</div>
 			</div>
 		);
 	}

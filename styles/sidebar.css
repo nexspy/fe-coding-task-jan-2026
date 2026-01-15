@@ -1,0 +1,7 @@
+.bg-sidebar {
+	background-color: var(--bgCream);
+}
+
+.active-menu {
+	background-color: var(--menuHighlight);
+}

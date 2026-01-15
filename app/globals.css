@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @import "../styles/common.css";
+@import "../styles/sidebar.css";
 
 :root {
 	--background: #ffffff;
@@ -15,6 +16,8 @@
 
 	--box: #181818;
 	--bgColorDark: #171717;
+	--bgCream: #f2f1ef;
+	--menuHighlight: #eae4d8;
 }
 
 .dark {
@@ -30,6 +33,8 @@
 
 	--box: #181818;
 	--bgColorDark: #171717;
+	--bgCream: #f2f1ef;
+	--menuHighlight: #eae4d8;
 }
 
 @theme inline {
@@ -46,6 +51,8 @@
 	--font-mono: var(--font-geist-mono);
 
 	--bgColorDark: #171717;
+	--bgCream: #f2f1ef;
+	--menuHighlight: #eae4d8;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -35,4 +35,12 @@ export class AuthService {
 	static isAuthenticated(): boolean {
 		return this.getCurrentUser() !== null;
 	}
+
+	/**
+	 * Logout user
+	 *  - by removing current user from local storage
+	 */
+	static logout(): void {
+		this.removeCurrentUser();
+	}
 }
