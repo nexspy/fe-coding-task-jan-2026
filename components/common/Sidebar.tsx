@@ -39,6 +39,11 @@ export const Sidebar = () => {
 			: "";
 	}, [user]);
 
+	// name of user's company
+	const companyName = useMemo(() => {
+		return user ? user.company.name : "";
+	}, [user]);
+
 	const handleLogoutClick = () => {
 		setShowLogoutModal(true);
 	};
@@ -61,10 +66,10 @@ export const Sidebar = () => {
 			<div className="flex items-center justify-center h-16 gap-2 bg-gray-400">
 				<img
 					src={"/images/vega.png"}
-					alt="Vega Logo"
+					alt="Company Logo"
 					className="w-10"
 				/>
-				<h1 className=" text-xl font-bold">Vega</h1>
+				<h1 className=" text-xl font-bold">{companyName}</h1>
 			</div>
 
 			{/* Navigation */}
@@ -96,10 +101,10 @@ export const Sidebar = () => {
 							{userInitials}
 						</span>
 					</div>
-					<div className="ml-3 flex flex-col gap-1">
+					<div className="ml-3 flex flex-col gap-1 text-black">
 						<p className="text-sm font-medium ">{user?.fullName}</p>
 						<p className="text-xs text-gray-800">{user?.email}</p>
-						<p className="flex items-center gap-1 text-sm">
+						<p className="flex items-center gap-1 text-sm ">
 							<RiLogoutBoxLine />
 							<button
 								type="button"
