@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { Loading } from "./Loading";
 import { COLORS } from "@/config/colors";
+import { toast } from "react-toastify";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -52,7 +53,7 @@ const chartOptions = {
 
 export const AssetChart = () => {
 	const [data, setData] = useState<ChartData>(defaultData);
-	const { assets, loading } = useAssets();
+	const { assets, loading, error } = useAssets();
 
 	/**
 	 * Map the assets into data format required by chartjs
@@ -94,6 +95,15 @@ export const AssetChart = () => {
 			],
 		});
 	};
+
+	useEffect(() => {
+		if (!error) return;
+
+		// show toast for error
+		toast.error(`Error fetching asset data`, {
+			position: "top-right",
+		});
+	}, [error]);
 
 	useEffect(() => {
 		// map assets to dataset of chart

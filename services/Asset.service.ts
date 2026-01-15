@@ -17,7 +17,7 @@ export class AssetService {
 			throw new Error("Failed to fetch assets");
 		} catch (error) {
 			console.error("Error fetching assets:", error);
-			return [];
+			throw error;
 		}
 	}
 
