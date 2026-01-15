@@ -43,9 +43,9 @@ export const AssetChart = () => {
 
 	return (
 		<div>
-			<h2>Donut chart</h2>
+			<h2 className="font-bold">Assets</h2>
 
-			<div className="w-[50%] mx-auto">
+			<div className="w-full md:w-[50%] mx-auto">
 				<Doughnut data={data} options={options} />
 			</div>
 		</div>
