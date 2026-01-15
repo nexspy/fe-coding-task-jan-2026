@@ -4,7 +4,7 @@
  * @returns
  */
 import Link from "next/link";
-import { FaHome } from "react-icons/fa";
+import { MdOutlineDashboard } from "react-icons/md";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -20,7 +20,7 @@ export type MenuItem = {
 };
 
 export const menuItems: MenuItem[] = [
-	{ name: "Dashboard", route: "/dashboard", icon: <FaHome /> },
+	{ name: "Dashboard", route: "/dashboard", icon: <MdOutlineDashboard /> },
 ];
 
 export const Sidebar = () => {
