@@ -53,3 +53,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 Here is how the project files and directories are managed.
 
 [View](./docs/Directories.md)
+
+## Entities
+
+Related and interacting units of the platform are described here
+
+[View](./docs/Entities.md)
