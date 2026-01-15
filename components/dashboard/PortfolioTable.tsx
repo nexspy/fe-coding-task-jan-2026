@@ -2,7 +2,7 @@
 
 import { useAssets } from "@/hooks/useAssets";
 import { Loading } from "./Loading";
-import { AssetView } from "@/types/portfolio/Asset";
+import { AssetType, AssetView } from "@/types/portfolio/Asset";
 import { AssetAvatar } from "./AssetAvatar";
 import { Tag } from "../common/Tag";
 import { AssetService } from "@/services/Asset.service";
@@ -49,13 +49,27 @@ const PortfolioTableContent = ({ assets }: Props) => {
 					const { priceChange, priceChangePercent, latestPrice } =
 						AssetService.calculatePriceChange(asset);
 
+					// calculate tag color based on asset type
+					let tagColor = "bg-primary text-white";
+					switch (asset.type) {
+						case AssetType.STOCK:
+							tagColor = "bg-primary text-white";
+							break;
+						case AssetType.CRYPTO:
+							tagColor = "bg-secondary text-gray-800";
+							break;
+						case AssetType.FLAT:
+							tagColor = "bg-tertiary text-gray-800";
+							break;
+					}
+
 					return (
 						<tr key={asset.id}>
 							<td className="p-2">
 								<AssetAvatar asset={asset} />
 							</td>
 							<td className="p-2 capitalize">
-								<Tag>{asset.type}</Tag>
+								<Tag bgColor={tagColor}>{asset.type}</Tag>
 							</td>
 							<td className="p-2 text-right">
 								£{latestPrice.toLocaleString()}
