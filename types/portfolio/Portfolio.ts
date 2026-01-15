@@ -3,7 +3,7 @@
  *
  * Belongs to one company and has many positions.
  */
-import { Position } from "./Position";
+import { PositionView } from "./Position";
 
 export type PortfolioBase = {
 	id: string;
@@ -17,6 +17,6 @@ export type PortfolioBase = {
 export type PortfolioCreatePayload = Omit<PortfolioBase, "id" | "asOf">;
 
 // used in views
-export type Portfolio = Omit<PortfolioBase, "positions" | "company"> & {
-	positions: Position[];
+export type Portfolio = Omit<PortfolioBase, "positions"> & {
+	positions: PositionView[];
 };

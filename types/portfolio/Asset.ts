@@ -5,6 +5,8 @@
  * Has many prices and can be of different types (stock, crypto, fiat).
  */
 
+import { PriceInAsset } from "./Price";
+
 export enum AssetType {
 	STOCK = "stock",
 	CRYPTO = "cryptocurrency",
@@ -18,4 +20,8 @@ export type Asset = {
 	type: AssetType;
 
 	prices?: string[]; // FK, price ids
+};
+
+export type AssetView = Omit<Asset, "prices"> & {
+	prices: PriceInAsset[];
 };

@@ -49,6 +49,7 @@ export async function GET() {
 
 	return NextResponse.json({
 		success: true,
+		message: "Assets fetched successfully",
 		data: assets,
 	});
 }

@@ -18,6 +18,13 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { COLORS } from "@/config/colors";
+import { usePortfolios } from "@/hooks/usePortfolios";
+import { useEffect, useState } from "react";
+import { Portfolio } from "@/types/portfolio/Portfolio";
+import { Loading } from "./Loading";
+import { PriceInAsset } from "@/types/portfolio/Price";
+import { PositionView } from "@/types/portfolio/Position";
+import { getLastMonthsLabels } from "@/utils/date";
 
 ChartJS.register(
 	CategoryScale,
@@ -30,75 +37,113 @@ ChartJS.register(
 	Filler
 );
 
-export const PortfolioChart = () => {
-	const data = {
-		labels: [
-			"Jan",
-			"Feb",
-			"Mar",
-			"Apr",
-			"May",
-			"Jun",
-			"Jul",
-			"Aug",
-			"Sep",
-			"Oct",
-			"Nov",
-			"Dec",
-		],
-		datasets: [
-			{
-				label: "Portfolio Value (£)",
-				data: [
-					10000, 12000, 11500, 13000, 14500, 15000, 14800, 16000,
-					17500, 18000, 19000, 20000,
-				],
-				borderColor: COLORS.primary,
-				backgroundColor: `${COLORS.primary}20`, // 20 = 12.5% opacity in hex
-				fill: true,
-				tension: 0.4, // smooth curve
-				pointRadius: 4,
-				pointHoverRadius: 6,
+type LineChartData = {
+	labels: string[];
+	datasets: {
+		label: string;
+		data: number[];
+		borderColor: string;
+		backgroundColor: string;
+		fill: boolean;
+		tension: number;
+		pointRadius: number;
+		pointHoverRadius: number;
+	}[];
+};
+
+const defaultData: LineChartData = {
+	labels: [],
+	datasets: [],
+};
+
+const lineChartOptions = {
+	responsive: true,
+	maintainAspectRatio: false,
+	plugins: {
+		legend: {
+			display: true,
+			position: "top" as const,
+		},
+		tooltip: {
+			mode: "index" as const,
+			intersect: false,
+			callbacks: {
+				label: function (context: any) {
+					return `${
+						context.dataset.label
+					}: ${context.parsed.y.toLocaleString()}`;
+				},
 			},
-		],
+		},
+	},
+	scales: {
+		y: {
+			beginAtZero: false,
+			ticks: {
+				callback: function (value: any) {
+					return "£" + value.toLocaleString();
+				},
+			},
+		},
+	},
+};
+
+export const PortfolioChart = () => {
+	const [data, setData] = useState<LineChartData>(defaultData);
+	const { portfolios, loading } = usePortfolios();
+
+	const mapPortfoliosToLineChartData = (portfolios: Portfolio[]) => {
+		if (portfolios.length === 0) return;
+
+		let dataValues: number[] = [];
+
+		// loop through all portfolios and aggregate their monthly values
+		portfolios.forEach((portfolio: Portfolio) => {
+			portfolio.positions.forEach((position: PositionView) => {
+				let sumPosition = 0;
+				position.asset.prices.forEach((price: PriceInAsset) => {
+					sumPosition += price.price * position.quantity;
+				});
+
+				// accumulate month's value using prices of assets in that month
+				dataValues.push(sumPosition);
+			});
+		});
+
+		const lastMonthsLabels = getLastMonthsLabels(6);
+
+		setData({
+			labels: lastMonthsLabels.reverse(),
+			datasets: [
+				{
+					label: "Portfolio Value (£)",
+					data: dataValues.reverse(), // lastest data is at the start so have to reverse
+					borderColor: COLORS.primary,
+					backgroundColor: `${COLORS.primary}20`, // 20 = 12.5% opacity in hex
+					fill: true,
+					tension: 0.4, // smooth curve
+					pointRadius: 4,
+					pointHoverRadius: 6,
+				},
+			],
+		});
 	};
 
-	const options = {
-		responsive: true,
-		maintainAspectRatio: true,
-		plugins: {
-			legend: {
-				display: true,
-				position: "top" as const,
-			},
-			tooltip: {
-				mode: "index" as const,
-				intersect: false,
-				callbacks: {
-					label: function (context: any) {
-						return `£{
-							context.dataset.label
-						}: £${context.parsed.y.toLocaleString()}`;
-					},
-				},
-			},
-		},
-		scales: {
-			y: {
-				beginAtZero: false,
-				ticks: {
-					callback: function (value: any) {
-						return "$" + value.toLocaleString();
-					},
-				},
-			},
-		},
-	};
+	useEffect(() => {
+		mapPortfoliosToLineChartData(portfolios);
+	}, [portfolios]);
 
 	return (
 		<div>
 			<h2 className="font-bold mb-4">Portfolio Performance</h2>
-			<Line data={data} options={options} />
+
+			<div className="w-full mx-auto" style={{ height: "340px" }}>
+				{loading ? (
+					<Loading />
+				) : (
+					<Line data={data} options={lineChartOptions} />
+				)}
+			</div>
 		</div>
 	);
 };
