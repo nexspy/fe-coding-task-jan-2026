@@ -1,11 +1,12 @@
 "use client";
 
-import { useAssets } from "@/hooks/useAssets";
-import { Asset, AssetType } from "@/types/portfolio/Asset";
 /**
  * Chart component for displaying asset data
  *  - this can be used in dashboard page
  */
+
+import { useAssets } from "@/hooks/useAssets";
+import { Asset, AssetType } from "@/types/portfolio/Asset";
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { useEffect, useState } from "react";
