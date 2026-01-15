@@ -22,9 +22,9 @@ export const MobileMenu = () => {
 				className="md:hidden fixed top-4 right-4 z-50 p-2 rounded-lg burger-menu"
 			>
 				{isMobileMenuOpen ? (
-					<IoClose size={24} color="black" />
+					<IoClose size={24} className="text-foreground" />
 				) : (
-					<HiMenuAlt3 size={24} color="black" />
+					<HiMenuAlt3 size={24} className="text-foreground" />
 				)}
 			</button>
 
