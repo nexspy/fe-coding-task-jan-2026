@@ -73,6 +73,10 @@ export class UserService {
 	): Promise<ServerResponse<User> | null> {
 		let users = await this.getAllUsers();
 
+		// Normalize email to lowercase
+		let userEmail = data.email.toLowerCase();
+		data.email = userEmail;
+
 		// Check if user already exists
 		if (users.find((u) => u.email === data.email)) {
 			return {
