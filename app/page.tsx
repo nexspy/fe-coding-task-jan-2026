@@ -9,6 +9,7 @@ import { LoginPayload } from "@/types/Auth";
 import { User } from "@/types/User";
 import { UserService } from "@/services/User.service";
 import { AuthService } from "@/services/Auth.service";
+import { ThemeToggle } from "@/components/common/ThemeToggle";
 
 export default function Home() {
 	const router = useRouter();
@@ -51,6 +52,11 @@ export default function Home() {
 
 	return (
 		<div className="flex min-h-screen items-center justify-center bg-bgColor bg-shadowImage px-4">
+			{/* Theme toggle button */}
+			<div className="fixed top-4 right-4">
+				<ThemeToggle />
+			</div>
+
 			<div className="flex flex-col w-full max-w-md rounded-lg border border-border bg-box p-8 shadow-lg">
 				{/* Header */}
 				<div className="mb-6 text-center">
