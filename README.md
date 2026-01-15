@@ -38,7 +38,7 @@ Then, from next time use this command
 docker compose up
 ```
 
-### NPM command
+### NPM command
 
 Use this command to run the project.
 
