@@ -135,7 +135,6 @@ export const PortfolioChart = () => {
 		if (!error) return;
 
 		// show toast for error
-		console.log("error", error);
 		toast.error(`Error fetching portfolio performance`, {
 			position: "top-right",
 		});
