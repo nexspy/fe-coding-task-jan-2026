@@ -6,13 +6,14 @@ import { AssetType, AssetView } from "@/types/portfolio/Asset";
 import { AssetAvatar } from "./AssetAvatar";
 import { Tag } from "../common/Tag";
 import { AssetService } from "@/services/Asset.service";
+import { FailedBox } from "../common/FailedBox";
 
 /**
  * Table component - displays the company's portfolio in a tabular format
  */
 
 export const PortfolioTable = () => {
-	const { assets, loading } = useAssets();
+	const { assets, loading, error } = useAssets();
 
 	return (
 		<div>
@@ -25,6 +26,8 @@ export const PortfolioTable = () => {
 					<PortfolioTableContent assets={assets} />
 				)}
 			</div>
+
+			{error && <FailedBox message="Failed to load portfolio data" />}
 		</div>
 	);
 };
