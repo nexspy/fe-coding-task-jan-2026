@@ -109,7 +109,23 @@ export const AssetChart = () => {
 
 			case FilterOptions.BY_ASSET:
 				const assetLabels = assets.map((asset) => asset.name);
-				const assetDataValues = assets.map((asset) => parseFloat("12"));
+
+				let totalAssetsValue = 0;
+				assets.map((asset: AssetView) => {
+					asset.prices.forEach((price) => {
+						totalAssetsValue += price.price;
+					});
+				});
+
+				const assetDataValues = assets.map((asset: AssetView) => {
+					let total = 0;
+					asset.prices.forEach((price) => {
+						total += price.price;
+					});
+					return parseFloat(
+						((total / totalAssetsValue) * 100).toFixed(2)
+					);
+				});
 
 				setData({
 					labels: assetLabels as AssetType[],
@@ -153,7 +169,7 @@ export const AssetChart = () => {
 				<h2 className="font-bold">Portfolio Balance</h2>
 
 				<select
-					className="border border-gray-300 rounded-md p-2"
+					className="border border-gray-300 rounded-md p-2 cursor-pointer"
 					onChange={handleFilterChange}
 				>
 					<option value={"by_class"}>Filter by Asset Class</option>
