@@ -12,20 +12,20 @@ import { AuthService } from "@/services/Auth.service";
 import { useAuth } from "@/components/AuthProvider";
 import { useMemo } from "react";
 
-type MenuItem = {
+export type MenuItem = {
 	name: string;
 	route: string;
 	icon: React.ReactNode;
 };
 
+export const menuItems: MenuItem[] = [
+	{ name: "Dashboard", route: "/dashboard", icon: <FaHome /> },
+];
+
 export const Sidebar = () => {
 	const router = useRouter();
 	const pathname = usePathname();
 	const { user } = useAuth();
-
-	const menuItems: MenuItem[] = [
-		{ name: "Dashboard", route: "/dashboard", icon: <FaHome /> },
-	];
 
 	// use for avatar initials
 	const userInitials = useMemo(() => {

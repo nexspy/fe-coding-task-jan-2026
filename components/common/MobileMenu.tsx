@@ -1,0 +1,127 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import { HiMenuAlt3 } from "react-icons/hi";
+import { IoClose } from "react-icons/io5";
+import { MenuItem, menuItems } from "./Sidebar";
+import { usePathname, useRouter } from "next/navigation";
+import Link from "next/link";
+import { useAuth } from "../AuthProvider";
+import { RiLogoutBoxLine } from "react-icons/ri";
+import { AuthService } from "@/services/Auth.service";
+
+export const MobileMenu = () => {
+	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+	return (
+		<div>
+			<button
+				onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+				className="md:hidden fixed top-4 right-4 z-50 p-2 rounded-lg bg-sidebar "
+			>
+				{isMobileMenuOpen ? (
+					<IoClose size={24} />
+				) : (
+					<HiMenuAlt3 size={24} />
+				)}
+			</button>
+
+			{isMobileMenuOpen && <MobileMenuNav />}
+		</div>
+	);
+};
+
+const MobileMenuNav = () => {
+	const pathname = usePathname();
+	const router = useRouter();
+	const { user } = useAuth();
+
+	// use for avatar initials
+	const userInitials = useMemo(() => {
+		return user
+			? user.fullName
+					.split(" ")
+					.map((namePart) => namePart.charAt(0).toUpperCase())
+					.join("")
+			: "";
+	}, [user]);
+
+	const handleLogoutClick = () => {
+		try {
+			AuthService.logout();
+			router.push("/");
+		} catch (error) {
+			console.error("Logout failed:", error);
+		}
+	};
+
+	return (
+		<>
+			{/* Overlay */}
+			<div className="fixed inset-0 bg-black bg-opacity-50 z-40" />
+
+			{/* Sidebar */}
+			<div className="fixed inset-y-0 left-0 w-64 bg-sidebar z-50 flex flex-col">
+				{/* Logo */}
+				<div className="flex items-center justify-center h-16 gap-2 bg-gray-400">
+					<img
+						src="/images/vega.png"
+						alt="Vega Logo"
+						className="w-10"
+					/>
+					<h1 className="text-xl font-bold">Vega</h1>
+				</div>
+
+				{/* Navigation */}
+				<nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+					{menuItems.map((item: MenuItem) => {
+						const isActive = pathname === item.route;
+						return (
+							<Link
+								key={item.name}
+								href={item.route}
+								className={`flex items-center px-4 py-3 rounded-lg transition-colors gap-2 ${
+									isActive
+										? "bg-gray-200 active-menu"
+										: "text-gray-400 hover:bg-gray-800 hover:text-white"
+								}`}
+							>
+								{item.icon}
+								<span className="font-medium">{item.name}</span>
+							</Link>
+						);
+					})}
+				</nav>
+
+				{/* User Profile & Logout */}
+				<div className="p-4 border-t border-gray-800">
+					<div className="flex items-center">
+						<div className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center">
+							<span className="font-semibold">
+								{userInitials}
+							</span>
+						</div>
+						<div className="ml-3 flex flex-col gap-1">
+							<p className="text-sm font-medium">
+								{user?.fullName}
+							</p>
+							<p className="text-xs text-gray-400">
+								{user?.email}
+							</p>
+							<p className="flex items-center gap-1 text-sm">
+								<RiLogoutBoxLine />
+								<button
+									type="button"
+									onClick={handleLogoutClick}
+									className="cursor-pointer"
+								>
+									Logout
+								</button>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</>
+	);
+};
