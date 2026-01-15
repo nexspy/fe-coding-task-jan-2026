@@ -41,14 +41,18 @@ export const Sidebar = () => {
 
 	const handleLogoutClick = () => {
 		setShowLogoutModal(true);
+	};
 
-		// try {
-		// 	AuthService.logout();
-		// 	// redirect to login page
-		// 	router.push("/");
-		// } catch (error) {
-		// 	console.error("Logout failed:", error);
-		// }
+	// logout user using the service class
+	const logoutUser = () => {
+		try {
+			AuthService.logout();
+			// redirect to login page
+			router.push("/");
+		} catch (error) {
+			console.error("Logout failed:", error);
+		}
+		setShowLogoutModal(false);
 	};
 
 	return (
@@ -119,9 +123,7 @@ export const Sidebar = () => {
 					}
 					textYes={"Logout"}
 					onOpenChange={setShowLogoutModal}
-					onConfirm={() => {
-						console.log("out");
-					}}
+					onConfirm={logoutUser}
 				/>
 			)}
 		</div>
