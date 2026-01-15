@@ -2,7 +2,8 @@
  * User service to handle user-related operations.
  */
 import { LoginPayload } from "@/types/Auth";
-import { CompanyCreatePayload } from "@/types/Company";
+import { Company, CompanyCreatePayload } from "@/types/Company";
+import { Portfolio } from "@/types/portfolio/Portfolio";
 import { ServerResponse } from "@/types/Server";
 import { User, UserCreatePayload } from "@/types/User";
 import { generateUUID } from "@/utils/uuid";
@@ -78,14 +79,23 @@ export class UserService {
 			};
 		}
 
+		// new portfolio (default) for the new company
+		let newPortfolio: Portfolio = {
+			id: generateUUID(),
+			name: "Default Portfolio",
+			asOf: new Date(),
+			positions: [],
+		};
+
 		let newCompanyCreateData: CompanyCreatePayload = {
 			name: data.companyName,
 		};
 
-		let newCompany = {
+		let newCompany: Company = {
 			...newCompanyCreateData,
 			id: generateUUID(),
 			createdAt: new Date().toISOString(),
+			portfolios: [newPortfolio.id],
 		};
 
 		let newUser: User = {

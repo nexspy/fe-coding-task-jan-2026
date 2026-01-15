@@ -10,7 +10,6 @@ export type PortfolioBase = {
 	name: string; // e.g., "Retirement Fund"
 	asOf: Date; // when the portfolio was last updated
 
-	company: string; // FK, company id
 	positions: string[]; // FK, position ids
 };
 
