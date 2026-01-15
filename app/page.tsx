@@ -28,7 +28,6 @@ export default function Home() {
 			const response = await UserService.login(data);
 			if (response && !response.success) {
 				toast.error(response.message);
-				// alert(response.message);
 			} else {
 				toast.success("Login successful!");
 

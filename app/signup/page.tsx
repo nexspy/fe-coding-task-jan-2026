@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 import { UserCreatePayload } from "@/types/User";
 import { UserService } from "@/services/User.service";
+import { toast } from "react-toastify";
 
 export default function SignupPage() {
 	const router = useRouter();
@@ -21,9 +22,9 @@ export default function SignupPage() {
 		try {
 			const response = await UserService.save(data);
 			if (response && !response.success) {
-				alert(response.message);
+				toast.error(response.message);
 			} else {
-				alert("User registered successfully!");
+				toast.success("User registered successfully!");
 
 				// navgigate to login page
 				router.push("/");
