@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AuthService } from "@/services/Auth.service";
+import { AuthProvider } from "./AuthProvider";
 
 export default function ProtectedRoute({
 	children,
@@ -14,6 +15,7 @@ export default function ProtectedRoute({
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
+		// check authentication status of user
 		const authenticated = AuthService.isAuthenticated();
 		if (!authenticated) {
 			router.push("/");
@@ -31,5 +33,6 @@ export default function ProtectedRoute({
 		);
 	}
 
-	return <>{children}</>;
+	// wrapping children with AuthProvider to provide auth context (making user available throughout the app)
+	return <AuthProvider>{children}</AuthProvider>;
 }

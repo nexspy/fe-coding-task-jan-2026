@@ -9,6 +9,8 @@ import { RiLogoutBoxLine } from "react-icons/ri";
 import { usePathname, useRouter } from "next/navigation";
 
 import { AuthService } from "@/services/Auth.service";
+import { useAuth } from "@/components/AuthProvider";
+import { useMemo } from "react";
 
 type MenuItem = {
 	name: string;
@@ -19,10 +21,21 @@ type MenuItem = {
 export const Sidebar = () => {
 	const router = useRouter();
 	const pathname = usePathname();
+	const { user } = useAuth();
 
 	const menuItems: MenuItem[] = [
 		{ name: "Dashboard", route: "/dashboard", icon: <FaHome /> },
 	];
+
+	// use for avatar initials
+	const userInitials = useMemo(() => {
+		return user
+			? user.fullName
+					.split(" ")
+					.map((namePart) => namePart.charAt(0).toUpperCase())
+					.join("")
+			: "";
+	}, [user]);
 
 	const handleLogoutClick = () => {
 		try {
@@ -72,13 +85,13 @@ export const Sidebar = () => {
 			<div className="p-4 border-t border-gray-800">
 				<div className="flex items-center">
 					<div className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center">
-						<span className="text-white font-semibold">U</span>
+						<span className="text-white font-semibold">
+							{userInitials}
+						</span>
 					</div>
 					<div className="ml-3 flex flex-col gap-1">
-						<p className="text-sm font-medium ">Full Name</p>
-						<p className="text-xs text-gray-800">
-							user@example.com
-						</p>
+						<p className="text-sm font-medium ">{user?.fullName}</p>
+						<p className="text-xs text-gray-800">{user?.email}</p>
 						<p className="flex items-center gap-1 text-sm">
 							<RiLogoutBoxLine />
 							<button
