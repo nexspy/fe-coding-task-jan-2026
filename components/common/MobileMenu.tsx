@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useAuth } from "../AuthProvider";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { AuthService } from "@/services/Auth.service";
+import { ConfirmationModal } from "./ConfirmationModal";
 
 export const MobileMenu = () => {
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -40,6 +41,8 @@ const MobileMenuNav = ({ isMobileMenuOpen }: MenuProps) => {
 	const router = useRouter();
 	const { user } = useAuth();
 
+	const [showLogoutModal, setShowLogoutModal] = useState(false);
+
 	// use for avatar initials
 	const userInitials = useMemo(() => {
 		return user
@@ -50,13 +53,20 @@ const MobileMenuNav = ({ isMobileMenuOpen }: MenuProps) => {
 			: "";
 	}, [user]);
 
-	const handleLogoutClick = () => {
+	// logout user using the service class
+	const logoutUser = () => {
 		try {
 			AuthService.logout();
+			// redirect to login page
 			router.push("/");
 		} catch (error) {
 			console.error("Logout failed:", error);
 		}
+		setShowLogoutModal(false);
+	};
+
+	const handleLogoutClick = () => {
+		setShowLogoutModal(true);
 	};
 
 	return (
@@ -132,6 +142,20 @@ const MobileMenuNav = ({ isMobileMenuOpen }: MenuProps) => {
 					</div>
 				</div>
 			</div>
+
+			{/* Logout modal */}
+			{showLogoutModal && (
+				<ConfirmationModal
+					open={showLogoutModal}
+					title="Logout"
+					text={
+						"Do you want to logout? You will need to sign in again to access your dashboard."
+					}
+					textYes={"Logout"}
+					onOpenChange={setShowLogoutModal}
+					onConfirm={logoutUser}
+				/>
+			)}
 		</>
 	);
 };

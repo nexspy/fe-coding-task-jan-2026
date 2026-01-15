@@ -32,7 +32,7 @@ export function ConfirmationModal({
 				onClick={() => onOpenChange(false)}
 			/>
 
-			<div className="fixed left-1/2 top-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg border border-border bg-background p-6 shadow-lg">
+			<div className="fixed left-1/2 top-1/2 z-50 w-[90%] md:w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg border border-border bg-background p-6 shadow-lg">
 				<div className="space-y-4">
 					{/* Header */}
 					<div className="space-y-2">
