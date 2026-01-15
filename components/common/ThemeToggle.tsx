@@ -43,7 +43,7 @@ export function ThemeToggle() {
 	return (
 		<button
 			onClick={toggleTheme}
-			className="bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:opacity-90 absolute top-4 right-16 md:right-4 "
+			className="cursor-pointer bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:opacity-90 absolute top-4 right-16 md:right-4 "
 		>
 			{theme === ThemeMode.Light ? (
 				<MdOutlineDarkMode size={ICON_SIZE} />
