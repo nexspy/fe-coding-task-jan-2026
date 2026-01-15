@@ -51,7 +51,7 @@ export default function Home() {
 	}, []);
 
 	return (
-		<div className="flex min-h-screen items-center justify-center bg-bgColor bg-shadowImage px-4">
+		<div className="flex min-h-screen items-center justify-center bg-background bg-shadowImage px-4">
 			{/* Theme toggle button */}
 			<div className="fixed top-4 right-4">
 				<ThemeToggle />
