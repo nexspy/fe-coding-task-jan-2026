@@ -10,6 +10,7 @@ import { useAuth } from "../AuthProvider";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { AuthService } from "@/services/Auth.service";
 import { ConfirmationModal } from "./ConfirmationModal";
+import { MenuBottom } from "./MenuBottom";
 
 export const MobileMenu = () => {
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -83,7 +84,7 @@ const MobileMenuNav = ({ isMobileMenuOpen }: MenuProps) => {
 				}`}
 			>
 				{/* Logo */}
-				<div className="flex items-center justify-center h-16 gap-2 bg-gray-400">
+				<div className="flex items-center justify-center h-16 gap-2 bg-logo">
 					<img
 						src="/images/vega.png"
 						alt="Vega Logo"
@@ -114,33 +115,9 @@ const MobileMenuNav = ({ isMobileMenuOpen }: MenuProps) => {
 				</nav>
 
 				{/* User Profile & Logout */}
-				<div className="p-4 border-t border-gray-800">
-					<div className="flex items-center">
-						<div className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center">
-							<span className="font-semibold">
-								{userInitials}
-							</span>
-						</div>
-						<div className="ml-3 flex flex-col gap-1">
-							<p className="text-sm text-black font-medium">
-								{user?.fullName}
-							</p>
-							<p className="text-xs text-gray-400">
-								{user?.email}
-							</p>
-							<p className="flex items-center gap-1 text-sm text-black">
-								<RiLogoutBoxLine />
-								<button
-									type="button"
-									onClick={handleLogoutClick}
-									className="cursor-pointer"
-								>
-									Logout
-								</button>
-							</p>
-						</div>
-					</div>
-				</div>
+				{user && (
+					<MenuBottom user={user} onLogoutClick={handleLogoutClick} />
+				)}
 			</div>
 
 			{/* Logout modal */}
