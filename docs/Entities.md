@@ -6,7 +6,7 @@ This section is about entities that work around in this platform from my underst
 
 Collection of positions of a user/company
 
-## Position
+## Position
 
 How much of an asset you own
 
