@@ -184,7 +184,7 @@ export default function SignupPage() {
 				{/* Footer */}
 				<div className="mt-6 text-center text-sm text-white">
 					Already have an account?{" "}
-					<Link href="/" className="text-primary hover:text-accent">
+					<Link href="/" className="text-secondary hover:text-accent">
 						Log in
 					</Link>
 				</div>
@@ -192,7 +192,7 @@ export default function SignupPage() {
 				<div className="mt-4 text-center">
 					<Link
 						href="/"
-						className="text-sm text-primary hover:text-accent"
+						className="text-sm text-tertiary hover:text-accent"
 					>
 						← Back to Home
 					</Link>

@@ -135,7 +135,7 @@ export default function Home() {
 
 				<Link
 					href="/signup"
-					className="text-sm text-center text-primary hover:text-accent w-full"
+					className="text-sm text-center text-secondary hover:text-accent w-full"
 				>
 					Create Free Account
 				</Link>
