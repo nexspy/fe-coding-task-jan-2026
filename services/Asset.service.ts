@@ -7,34 +7,18 @@ export class AssetService {
 	 * @returns List of assets
 	 */
 	static async getAllAssets(): Promise<Asset[]> {
-		//TODO : remove the mock timer delay
-		await new Promise((resolve) => setTimeout(resolve, 2000));
+		try {
+			const response = await fetch("/api/assets");
+			const result = await response.json();
 
-		//TODO : Replace with real data fetching logic using Nextjs API routes or database queries
-		const assets: Asset[] = [
-			{
-				id: "1",
-				name: "Bitcoin",
-				symbol: "BTC",
-				type: AssetType.STOCK,
-				prices: ["101", "102"],
-			},
-			{
-				id: "2",
-				name: "Ethereum",
-				symbol: "ETH",
-				type: AssetType.CRYPTO,
-				prices: ["201", "202"],
-			},
-			{
-				id: "3",
-				name: "US Dollar",
-				symbol: "USD",
-				type: AssetType.FLAT,
-				prices: ["301", "302"],
-			},
-		];
+			if (result.success) {
+				return result.data;
+			}
 
-		return assets;
+			throw new Error("Failed to fetch assets");
+		} catch (error) {
+			console.error("Error fetching assets:", error);
+			return [];
+		}
 	}
 }
