@@ -12,6 +12,12 @@ For NextJs related documents [click here](./docs/NextJs.md)
 2. Typescript
 3. TailwindCSS
 
+## Demo
+
+Demo application has been hosted in **Netlify platform**
+
+[Demo]("https://demo-investment-portfolio.netlify.app/")
+
 ## Run your project
 
 We can run this project either locally **using npm command** or we can **use docker**
