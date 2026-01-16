@@ -74,10 +74,10 @@ export class UserService {
 	static async save(
 		data: UserCreatePayload
 	): Promise<ServerResponse<User> | null> {
-		let users = await this.getAllUsers();
+		const users = await this.getAllUsers();
 
 		// Normalize email to lowercase
-		let userEmail = data.email.toLowerCase();
+		const userEmail = data.email.toLowerCase();
 		data.email = userEmail;
 
 		// Check if user already exists
@@ -89,31 +89,30 @@ export class UserService {
 		}
 
 		// new portfolio (default) for the new company
-		let newPortfolio: Portfolio = {
+		const newPortfolio: Portfolio = {
 			id: generateUUID(),
 			name: "Default Portfolio",
 			asOf: new Date(),
 			positions: [],
 		};
 
-		let newCompanyCreateData: CompanyCreatePayload = {
+		const newCompanyCreateData: CompanyCreatePayload = {
 			name: data.companyName,
 		};
 
-		let newCompany: Company = {
+		const newCompany: Company = {
 			...newCompanyCreateData,
 			id: generateUUID(),
 			createdAt: new Date().toISOString(),
 			portfolios: [newPortfolio.id],
 		};
 
-		let hashedValue = await hashPassword(data.password);
+		const hashedValue = await hashPassword(data.password);
 
-		let newUser: User = {
+		const newUser: User = {
 			id: generateUUID(),
 			fullName: data.fullName,
 			email: data.email,
-			//TODO hash the password before saving
 			password: hashedValue,
 			company: newCompany,
 			createdAt: new Date().toISOString(),

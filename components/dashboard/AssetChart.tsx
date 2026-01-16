@@ -47,6 +47,7 @@ const chartOptions = {
 		},
 		tooltip: {
 			callbacks: {
+				// eslint-disable-next-line
 				label: function (context: any) {
 					const label = context.label || "";
 					const value = context.parsed || 0;

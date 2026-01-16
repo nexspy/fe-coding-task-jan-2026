@@ -16,6 +16,7 @@ import {
 	Tooltip,
 	Legend,
 	Filler,
+	TooltipItem,
 } from "chart.js";
 import { toast } from "react-toastify";
 
@@ -71,10 +72,10 @@ const lineChartOptions = {
 			mode: "index" as const,
 			intersect: false,
 			callbacks: {
-				label: function (context: any) {
-					return `${
-						context.dataset.label
-					}: ${context.parsed.y.toLocaleString()}`;
+				label: function (context: TooltipItem<"line">) {
+					return `${context.dataset.label}: ${(
+						context.parsed.y ?? 0
+					).toLocaleString()}`;
 				},
 			},
 		},
@@ -83,6 +84,7 @@ const lineChartOptions = {
 		y: {
 			beginAtZero: false,
 			ticks: {
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				callback: function (value: any) {
 					return "£" + value.toLocaleString();
 				},
@@ -98,7 +100,7 @@ export const PortfolioChart = () => {
 	const mapPortfoliosToLineChartData = (portfolios: Portfolio[]) => {
 		if (portfolios.length === 0) return;
 
-		let dataValues: number[] = [];
+		const dataValues: number[] = [];
 
 		// loop through all portfolios and aggregate their monthly values
 		portfolios.forEach((portfolio: Portfolio) => {

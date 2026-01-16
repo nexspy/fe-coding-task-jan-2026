@@ -17,7 +17,7 @@ export const PortfolioTable = () => {
 
 	return (
 		<div>
-			<h2 className="font-bold mt-4 mb-8">Company's Portfolio</h2>
+			<h2 className="font-bold mt-4 mb-8">Company&apos;s Portfolio</h2>
 
 			<div className="w-full mx-auto overflow-y-auto">
 				{loading ? (

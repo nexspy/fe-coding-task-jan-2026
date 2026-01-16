@@ -31,10 +31,10 @@ export async function GET(request: NextRequest) {
 	// Get last six months date
 	const lastMonths = getMonthlyDates(6);
 
-	let portfolios: Portfolio[] = [];
+	const portfolios: Portfolio[] = [];
 
 	// portfolio position in last 6 months
-	let portfolio: Portfolio = {
+	const portfolio: Portfolio = {
 		id: "6a9775d1-950c-42c1-bf04-0ad6bd712345",
 		name: "Retirement Fund",
 		asOf: lastMonths[0],

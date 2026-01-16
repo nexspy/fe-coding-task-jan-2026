@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { PortfolioService } from "@/services/Portfolio.service";
 import { Portfolio } from "@/types/portfolio/Portfolio";
+import { AssetType } from "@/types/portfolio/Asset";
 
 // Mock fetch (global fetch function/ built-in in browsers)
 global.fetch = vi.fn();
@@ -22,7 +23,7 @@ describe("PortfolioService", () => {
 						id: "5dd693ae-7644-496f-a70c-372060ba4c28",
 						name: "Bitcoin",
 						symbol: "BTC",
-						type: "Cryptocurrency" as any,
+						type: AssetType.CRYPTO,
 						prices: [],
 					},
 				},
