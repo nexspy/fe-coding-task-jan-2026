@@ -77,3 +77,12 @@ Related and interacting units of the platform are described here
 ## State Management
 
 [View State Management Documentation](./docs/StateManagement.md)
+
+## Troubleshooting
+
+If you are running the application with docker, and make updates, sometime it doesn't work.
+In this case, try running the build command again.
+If it still doesn't work, delete the docker container and image for this project and re-run from start.
+
+Sometimes NextJs may show some problem not updating to latest.
+In this case, delete the root **.next** directory and run the **npm run dev** command once more.
