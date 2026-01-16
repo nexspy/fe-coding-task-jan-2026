@@ -67,3 +67,7 @@ Related and interacting units of the platform are described here
 ## Figma UX Prototype
 
 [View Figma Design](https://www.figma.com/design/9cgsqlU4hmNDtx6wILiUTb/Dashboard-Prototype?node-id=0-1&t=bCOi2YLIchTo3m2j-1)
+
+## State Management
+
+[View State Management Documentation](./docs/StateManagement.md)
