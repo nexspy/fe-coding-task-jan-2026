@@ -64,12 +64,12 @@ export default function Home() {
 					<h1 className="text-3xl font-semibold text-white">
 						<img
 							src={"/images/vega.png"}
-							alt="Vega Logo"
+							alt="Investment Logo"
 							className="mx-auto mb-4 w-17.75"
 						/>
 					</h1>
 
-					<p className="text-white">Welcome to Vega</p>
+					<p className="text-white">Welcome to NovaFund</p>
 
 					{/* Form */}
 					<form

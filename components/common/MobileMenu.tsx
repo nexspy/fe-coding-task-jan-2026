@@ -78,7 +78,7 @@ const MobileMenuNav = ({ isMobileMenuOpen }: MenuProps) => {
 				<div className="flex items-center justify-center h-16 gap-2 bg-logo">
 					<img
 						src="/images/vega.png"
-						alt="Vega Logo"
+						alt="Investment Logo"
 						className="w-10"
 					/>
 					<h1 className="text-xl font-bold">Vega</h1>
