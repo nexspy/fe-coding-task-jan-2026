@@ -86,3 +86,7 @@ If it still doesn't work, delete the docker container and image for this project
 
 Sometimes NextJs may show some problem not updating to latest.
 In this case, delete the root **.next** directory and run the **npm run dev** command once more.
+
+## API (data sources)
+
+[API](./docs/API.md)
