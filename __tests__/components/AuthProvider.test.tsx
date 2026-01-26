@@ -48,7 +48,7 @@ describe("AuthProvider Component", () => {
 		render(
 			<AuthProvider>
 				<TestComponent />
-			</AuthProvider>
+			</AuthProvider>,
 		);
 
 		// wait for the component to update with user data
@@ -68,7 +68,7 @@ describe("AuthProvider Component", () => {
 		render(
 			<AuthProvider>
 				<TestComponent />
-			</AuthProvider>
+			</AuthProvider>,
 		);
 
 		await waitFor(() => {

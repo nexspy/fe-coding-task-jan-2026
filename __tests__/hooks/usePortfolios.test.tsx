@@ -52,7 +52,7 @@ describe("usePortfolios Hook", () => {
 	it("should fetch portfolios successfully", async () => {
 		// mock service method call and return test data
 		vi.mocked(PortfolioService.getAllPortfolios).mockResolvedValueOnce(
-			mockPortfolios
+			mockPortfolios,
 		);
 
 		const { result } = renderHook(() => usePortfolios(), { wrapper });
@@ -73,7 +73,7 @@ describe("usePortfolios Hook", () => {
 	it("should handle errors correctly", async () => {
 		const error = new Error("Failed to fetch portfolios");
 		vi.mocked(PortfolioService.getAllPortfolios).mockRejectedValueOnce(
-			error
+			error,
 		);
 
 		// mock custom hook "usePortfolios"
@@ -104,7 +104,7 @@ describe("usePortfolios Hook", () => {
 
 	it("should provide fetchPortfolios refetch function", async () => {
 		vi.mocked(PortfolioService.getAllPortfolios).mockResolvedValueOnce(
-			mockPortfolios
+			mockPortfolios,
 		);
 
 		const { result } = renderHook(() => usePortfolios(), { wrapper });
@@ -119,7 +119,7 @@ describe("usePortfolios Hook", () => {
 
 	it("should call PortfolioService.getAllPortfolios", async () => {
 		vi.mocked(PortfolioService.getAllPortfolios).mockResolvedValueOnce(
-			mockPortfolios
+			mockPortfolios,
 		);
 
 		renderHook(() => usePortfolios(), { wrapper });

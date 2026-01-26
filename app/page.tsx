@@ -22,7 +22,7 @@ export default function Home() {
 	} = useForm<LoginPayload>();
 
 	const onSubmit: SubmitHandler<LoginPayload> = async (
-		data: LoginPayload
+		data: LoginPayload,
 	) => {
 		try {
 			const response = await UserService.login(data);
