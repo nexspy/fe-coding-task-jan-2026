@@ -77,11 +77,11 @@ const MobileMenuNav = ({ isMobileMenuOpen }: MenuProps) => {
 				{/* Logo */}
 				<div className="flex items-center justify-center h-16 gap-2 bg-logo">
 					<img
-						src="/images/vega.png"
+						src="/images/flowvest.png"
 						alt="Investment Logo"
 						className="w-10"
 					/>
-					<h1 className="text-xl font-bold">Vega</h1>
+					<h1 className="text-xl font-bold">FlowVest</h1>
 				</div>
 
 				{/* Navigation */}

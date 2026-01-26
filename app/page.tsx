@@ -63,7 +63,7 @@ export default function Home() {
 				<div className="mb-6 text-center">
 					<h1 className="text-3xl font-semibold text-white">
 						<img
-							src={"/images/vega.png"}
+							src={"/images/flowvest.png"}
 							alt="Investment Logo"
 							className="mx-auto mb-4 w-17.75"
 						/>

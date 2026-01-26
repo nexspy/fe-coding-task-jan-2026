@@ -66,7 +66,7 @@ export const Sidebar = () => {
 			{/* Logo */}
 			<div className="flex items-center justify-center h-16 gap-2 bg-logo">
 				<img
-					src={"/images/vega.png"}
+					src={"/images/flowvest.png"}
 					alt="Company Logo"
 					className="w-10"
 				/>
