@@ -1,7 +1,11 @@
 "use client";
 
+import { useEffect, useId, useRef } from "react";
+
 /**
  * Confirmation modal
+ *  - accessible dialog: labelled, closes on Escape / backdrop click,
+ *    moves focus inside on open and restores it on close
  */
 
 interface Props {
@@ -23,42 +27,69 @@ export function ConfirmationModal({
 	onOpenChange,
 	onConfirm,
 }: Props) {
+	const titleId = useId();
+	const textId = useId();
+	const cancelRef = useRef<HTMLButtonElement>(null);
+
+	useEffect(() => {
+		if (!open) return;
+
+		const previouslyFocused = document.activeElement as HTMLElement | null;
+		cancelRef.current?.focus();
+
+		const onKeyDown = (event: KeyboardEvent) => {
+			if (event.key === "Escape") onOpenChange(false);
+		};
+		document.addEventListener("keydown", onKeyDown);
+
+		return () => {
+			document.removeEventListener("keydown", onKeyDown);
+			previouslyFocused?.focus();
+		};
+	}, [open, onOpenChange]);
+
 	if (!open) return null;
 
 	return (
-		<>
+		<div className="fixed inset-0 z-50 grid place-items-center p-4">
 			<div
-				className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
+				aria-hidden="true"
+				className="absolute inset-0 bg-black/60 backdrop-blur-sm"
 				onClick={() => onOpenChange(false)}
 			/>
 
-			<div className="fixed left-1/2 top-1/2 z-50 w-[90%] md:w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg border border-border bg-background p-6 shadow-lg">
-				<div className="space-y-4">
-					{/* Header */}
-					<div className="space-y-2">
-						<h2 className="text-lg font-semibold text-foreground">
-							{title}
-						</h2>
-						<p className="text-sm text-muted-foreground">{text}</p>
-					</div>
+			<div
+				role="alertdialog"
+				aria-modal="true"
+				aria-labelledby={titleId}
+				aria-describedby={textId}
+				className="relative w-full max-w-sm rounded-3xl border border-border bg-surface p-6 shadow-card"
+			>
+				<h2 id={titleId} className="text-lg font-semibold">
+					{title}
+				</h2>
+				<p id={textId} className="mt-2 text-sm text-muted-foreground">
+					{text}
+				</p>
 
-					{/* Footer buttons */}
-					<div className="flex justify-end gap-3">
-						<button
-							onClick={() => onOpenChange(false)}
-							className="cursor-pointer rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-						>
-							{textNo}
-						</button>
-						<button
-							onClick={onConfirm}
-							className="cursor-pointer rounded-md bg-destructive px-4 py-2 text-sm font-medium text-destructive-foreground transition-colors hover:bg-destructive/90"
-						>
-							{textYes}
-						</button>
-					</div>
+				<div className="mt-6 flex justify-end gap-3">
+					<button
+						ref={cancelRef}
+						type="button"
+						onClick={() => onOpenChange(false)}
+						className="rounded-full border border-border px-4 py-2 text-sm font-medium hover:bg-surface-hover"
+					>
+						{textNo}
+					</button>
+					<button
+						type="button"
+						onClick={onConfirm}
+						className="rounded-full bg-pill px-4 py-2 text-sm font-semibold text-pill-foreground hover:opacity-90"
+					>
+						{textYes}
+					</button>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }

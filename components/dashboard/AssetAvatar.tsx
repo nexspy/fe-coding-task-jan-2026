@@ -1,22 +1,22 @@
-import { AssetView } from "@/types/portfolio/Asset";
+import { Asset } from "@/types/portfolio/Asset";
 import { Avatar } from "../common/Avatar";
 
 /**
  * Asset Avatar Component
- *  - contains Avatar (user initials) and name and symbol of asset
+ *  - initials badge plus the asset's symbol and name
  */
 
 interface Props {
-	asset: AssetView;
+	asset: Pick<Asset, "name" | "symbol">;
 }
 
 export const AssetAvatar = ({ asset }: Props) => {
 	return (
-		<div className="grid grid-cols-[auto_1fr] gap-3 items-center">
+		<div className="flex min-w-0 items-center gap-3">
 			<Avatar fullname={asset.name} />
-			<div>
-				<h4 className="font-bold">{asset.name}</h4>
-				<p className="text-xs text-gray-500">{asset.symbol}</p>
+			<div className="min-w-0">
+				<p className="truncate text-sm font-semibold">{asset.symbol}</p>
+				<p className="truncate text-xs text-muted-foreground">{asset.name}</p>
 			</div>
 		</div>
 	);

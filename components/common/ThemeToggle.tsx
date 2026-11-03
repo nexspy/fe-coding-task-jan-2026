@@ -1,54 +1,61 @@
 "use client";
 
 /**
- * A button to toggle between light and dark themes.
- * - we use localStorage to persist the user's theme preference.
- **/
+ * A button to toggle between the dark (default) and light themes.
+ *  - the choice is persisted in localStorage
+ *  - an inline script in the root layout applies it before first paint,
+ *    so there is no flash of the wrong theme
+ */
 
 import { useEffect, useState } from "react";
-import { MdOutlineDarkMode } from "react-icons/md";
-import { FiSun } from "react-icons/fi";
+import { FiMoon, FiSun } from "react-icons/fi";
 
 export enum ThemeMode {
 	Light = "light",
 	Dark = "dark",
 }
 
-const ICON_SIZE = 24;
+export const THEME_STORAGE_KEY = "theme";
 
 export function ThemeToggle() {
-	const [theme, setTheme] = useState<ThemeMode>(ThemeMode.Light);
+	const [theme, setTheme] = useState<ThemeMode>(ThemeMode.Dark);
 
 	useEffect(() => {
-		const root = document.documentElement;
-		const savedTheme = localStorage.getItem("theme") as ThemeMode | null;
-
-		if (savedTheme) {
-			setTheme(savedTheme);
-			root.classList.toggle("dark", savedTheme === ThemeMode.Dark);
-		} else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-			setTheme(ThemeMode.Dark);
-			root.classList.add("dark");
-		}
+		setTheme(
+			document.documentElement.classList.contains(ThemeMode.Light)
+				? ThemeMode.Light
+				: ThemeMode.Dark,
+		);
 	}, []);
 
 	const toggleTheme = () => {
-		const newTheme =
-			theme === ThemeMode.Light ? ThemeMode.Dark : ThemeMode.Light;
-		setTheme(newTheme);
-		document.documentElement.classList.toggle("dark");
-		localStorage.setItem("theme", newTheme);
+		const next = theme === ThemeMode.Dark ? ThemeMode.Light : ThemeMode.Dark;
+		setTheme(next);
+		document.documentElement.classList.toggle(
+			ThemeMode.Light,
+			next === ThemeMode.Light,
+		);
+		try {
+			localStorage.setItem(THEME_STORAGE_KEY, next);
+		} catch {
+			// storage can be unavailable (private mode); the toggle still works
+		}
 	};
+
+	const nextLabel = theme === ThemeMode.Dark ? "light" : "dark";
 
 	return (
 		<button
+			type="button"
 			onClick={toggleTheme}
-			className="cursor-pointer bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:opacity-90 "
+			aria-label={`Switch to ${nextLabel} theme`}
+			title={`Switch to ${nextLabel} theme`}
+			className="grid size-10 place-items-center rounded-full border border-border bg-surface text-foreground hover:bg-surface-hover"
 		>
-			{theme === ThemeMode.Light ? (
-				<MdOutlineDarkMode size={ICON_SIZE} />
+			{theme === ThemeMode.Dark ? (
+				<FiSun aria-hidden="true" className="size-[18px]" />
 			) : (
-				<FiSun size={ICON_SIZE} />
+				<FiMoon aria-hidden="true" className="size-[18px]" />
 			)}
 		</button>
 	);
