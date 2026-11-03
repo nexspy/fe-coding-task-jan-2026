@@ -90,3 +90,15 @@ In this case, delete the root **.next** directory and run the **npm run dev** co
 ## API (data sources)
 
 [API](./docs/API.md)
+
+## Design
+
+The UI uses a dark charcoal theme with a lime accent (light theme available from the toggle). Colours are design tokens in `app/globals.css`; see [Theming](./docs/Directories.md#theming).
+
+| Dashboard (dark) | Dashboard (light) |
+| --- | --- |
+| ![Dashboard dark](./docs/screenshots/dash-desktop.png) | ![Dashboard light](./docs/screenshots/dash-light.png) |
+
+| Mobile | Login |
+| --- | --- |
+| ![Dashboard mobile](./docs/screenshots/dash-mobile.png) | ![Login](./docs/screenshots/login.png) |

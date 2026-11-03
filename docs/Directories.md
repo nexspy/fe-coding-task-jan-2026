@@ -18,9 +18,6 @@ Also, the context provider and custom hooks for Authentication, Protected Routes
 
 React Query is used to cache and manage data from api requests. It also does automatic refetching after intervals set.
 
-## config
-
-Values usuable in the project is stored here. For example, the colors to be used within a component are stored here.
 
 ## docker
 
@@ -46,11 +43,13 @@ Purpose of a service class is to encapsulate business logic and data operations 
 
 This gives use reusuable methods, error handling and data fetching.
 
-## styles
+## Theming
 
-Common and feature related styling css files are stored here.
+All colours are design tokens (CSS variables) defined once in `app/globals.css` and exposed to Tailwind through `@theme`, so components use classes like `bg-surface`, `text-muted-foreground` or `bg-accent`.
 
-These classes are imported in globals.css or in specific component file.
+-   Dark is the default brand theme; adding the `light` class on `<html>` switches to the light theme (the toggle persists the choice).
+-   White labelling only needs the variables in that block to be overridden.
+-   Charts read the same tokens at runtime through `hooks/useThemeTokens.ts`, so canvas colours follow the theme.
 
 ## types
 
@@ -62,6 +61,7 @@ Short and useful functions live here.
 
 Some of the utility functions feature wise are :
 
--   Dates formatting
+-   Currency, percent and date formatting (`format.ts`)
+-   Portfolio calculations: value history, current holdings, allocation, changes (`portfolio.ts`)
 -   UUID creation
 -   Password creation

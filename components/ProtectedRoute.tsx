@@ -27,8 +27,15 @@ export default function ProtectedRoute({
 
 	if (isLoading || !isAuthenticated) {
 		return (
-			<div className="flex items-center justify-center min-h-screen">
-				<div className="text-lg">Authenticating...</div>
+			<div
+				role="status"
+				className="flex min-h-dvh items-center justify-center gap-3 text-sm text-muted-foreground"
+			>
+				<span
+					aria-hidden="true"
+					className="size-4 animate-spin rounded-full border-2 border-border border-t-accent"
+				/>
+				Authenticating...
 			</div>
 		);
 	}

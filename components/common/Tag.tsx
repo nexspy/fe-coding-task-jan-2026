@@ -1,20 +1,20 @@
 /**
  * Tag Component
+ *  - small rounded label, e.g. for asset classes
  */
 
 interface Props {
 	children: React.ReactNode;
-	bgColor?: string;
-	textColor?: string;
+	className?: string;
 }
+
 export const Tag = ({
 	children,
-	bgColor = "bg-gray-200",
-	textColor = "text-gray-800",
+	className = "bg-surface-raised text-muted-foreground",
 }: Props) => {
 	return (
 		<span
-			className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${bgColor} ${textColor}`}
+			className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium whitespace-nowrap ${className}`}
 		>
 			{children}
 		</span>

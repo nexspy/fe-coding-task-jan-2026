@@ -11,15 +11,13 @@ export const useAssets = () => {
 		data: assets = [],
 		isLoading: loading,
 		error,
+		refetch,
 	} = useQuery<AssetView[]>({
 		queryKey: ["assets"],
-		queryFn: async () => {
-			const response = await AssetService.getAllAssets();
-			return response;
-		},
+		queryFn: () => AssetService.getAllAssets(),
 		// Refetch every 20 seconds
 		refetchInterval: 20000,
 	});
 
-	return { assets, loading, error };
+	return { assets, loading, error, refetch };
 };

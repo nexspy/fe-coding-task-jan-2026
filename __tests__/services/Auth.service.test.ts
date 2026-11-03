@@ -1,5 +1,5 @@
 // __tests__/services/Auth.service.test.ts
-import { describe, it, expect, beforeEach, vi } from "vitest";
+import { describe, it, expect, beforeEach } from "vitest";
 import { AuthService } from "@/services/Auth.service";
 import { User } from "@/types/User";
 
