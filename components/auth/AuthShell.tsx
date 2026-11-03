@@ -2,14 +2,20 @@ import { ReactNode } from "react";
 
 import { Logo } from "../common/Logo";
 import { ThemeToggle } from "../common/ThemeToggle";
-import { Sparkline } from "../common/Sparkline";
+import { FiActivity, FiPieChart, FiTrendingUp } from "react-icons/fi";
 
 /**
  * Layout for the login and signup pages:
  * a brand panel on large screens and the form card.
  */
 
-const PREVIEW_TREND = [42, 44, 43, 47, 46, 51, 49, 55, 58, 56, 62, 66];
+// Shown before login, so it describes features and never shows figures
+// that could be mistaken for account data.
+const FEATURES = [
+	{ icon: FiActivity, text: "Portfolio performance over 1M to 1Y" },
+	{ icon: FiPieChart, text: "Allocation by asset class or asset" },
+	{ icon: FiTrendingUp, text: "Market movers and weekly changes" },
+];
 
 interface Props {
 	title: string;
@@ -31,13 +37,19 @@ export const AuthShell = ({ title, subtitle, children, footer }: Props) => (
 					Track performance, allocation and market movers in real time.
 				</p>
 			</div>
-			<div className="max-w-sm rounded-3xl bg-accent-foreground p-5 text-white">
-				<p className="text-sm text-white/60">Portfolio value</p>
-				<div className="mt-1 flex items-end justify-between gap-4">
-					<p className="text-2xl font-semibold">$124,560.75</p>
-					<Sparkline values={PREVIEW_TREND} color="var(--accent)" className="h-10 w-28" />
-				</div>
-			</div>
+			<ul className="flex max-w-sm flex-col gap-3">
+				{FEATURES.map(({ icon: Icon, text }) => (
+					<li key={text} className="flex items-center gap-3 text-sm font-medium">
+						<span
+							aria-hidden="true"
+							className="grid size-9 shrink-0 place-items-center rounded-full bg-accent-foreground text-accent"
+						>
+							<Icon className="size-4" />
+						</span>
+						{text}
+					</li>
+				))}
+			</ul>
 		</aside>
 
 		{/* Form */}
