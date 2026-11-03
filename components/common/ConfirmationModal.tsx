@@ -1,11 +1,15 @@
 "use client";
 
 import { useEffect, useId, useRef } from "react";
+import { createPortal } from "react-dom";
 
 /**
  * Confirmation modal
  *  - accessible dialog: labelled, closes on Escape / backdrop click,
  *    moves focus inside on open and restores it on close
+ *  - rendered in a portal on <body>: the sidebar is position: sticky, which
+ *    creates its own stacking context, so a modal rendered inside it would
+ *    sit underneath positioned page content such as the charts
  */
 
 interface Props {
@@ -50,7 +54,7 @@ export function ConfirmationModal({
 
 	if (!open) return null;
 
-	return (
+	return createPortal(
 		<div className="fixed inset-0 z-50 grid place-items-center p-4">
 			<div
 				aria-hidden="true"
@@ -90,6 +94,7 @@ export function ConfirmationModal({
 					</button>
 				</div>
 			</div>
-		</div>
+		</div>,
+		document.body,
 	);
 }
